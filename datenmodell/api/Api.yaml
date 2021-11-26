@@ -1,0 +1,405 @@
+openapi: 3.0.3
+info:
+  title: Studibörse
+  description: "This is the REST API specifiction for the application Studibörse"
+  version: 1.0.0
+servers:
+- url: "http://127.0.0.1:8000"
+  description: "Development server"
+paths:
+  /login:
+    post:
+      tags: 
+        - Login
+      summary: login
+      responses:
+        200:
+          description: login
+          content:
+            text/plain:
+              schema:
+                type: string
+        404:
+          $ref: "#/components/responses/NotFound"
+  
+  /register:
+    post:
+      tags: 
+        - Registrierung
+      summary: Registrierung
+      responses:
+        200:
+          description: Registrierung erfolgreich
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  placeholder:
+                    type: string
+        409:
+          $ref: "#/components/responses/EntityAlreadyExist"
+          
+  /forgot:
+    get:
+      summary: Passwort vergessen
+      tags: 
+        - Login
+      responses:
+        200:
+          description: Passwort vergessen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  placeholder:
+                    type: string
+    post:
+      summary: aktualisiere vergessenes Passwort
+      tags: 
+        - Login
+      responses:
+        200:
+          description: Passwort aktualisiert
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  placeholder:
+                    type: string
+                    
+  /popular_games:
+    get:
+      summary: Beliebte Spiele
+      tags:
+        - Game
+      responses:
+        200:
+          description: Beliebte Spiele
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  placeholder:
+                    type: string
+
+  /notifications:
+    get:
+      summary: Benachrichtigungen
+      tags:
+        - Benachrichtigung
+      responses:
+        200:
+          description: Benachrichtigungen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  placeholder:
+                    type: string
+        401:
+          $ref: "#/components/responses/Unauthorized"
+          
+  /notification/{id}:
+    parameters:
+      - $ref: "#/components/parameters/id"
+    delete:
+      summary: Benachrichtigung als gelesen markieren
+      tags:
+        - Benachrichtigung
+      responses:
+        200:
+          $ref: "#/components/responses/Ok"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+ 
+  /social:
+    get:
+      tags:
+        - Social
+      summary: Kommentare von Freunden
+      responses:
+        200:
+          description: Kommentare von Freunden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  placeholder:
+                    type: string
+        401:
+          $ref: "#/components/responses/Unauthorized"
+  /new_games:
+    get:
+      tags:
+        - Game
+      summary: Neu erschienene Spiele
+      responses:
+        200:
+          description: Neu erschienene Spiele
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  placeholder:
+                    type: string
+          
+  /user/{id}:
+    parameters:
+      - $ref: "#/components/parameters/id"
+    get:
+      tags:
+        - User
+      summary: Profil des angegebenen Users
+      responses:
+        200:
+          description: Profil des angegebenen Users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  placeholder:
+                    type: string
+        404:
+          $ref: "#/components/responses/NotFound"
+  /user:
+    get:
+      tags:
+        - User
+      summary: Eigenes Profil
+      responses:
+        200:
+          description: Profil des angegebenen Users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  placeholder:
+                    type: string
+        401:
+          $ref: "#/components/responses/Unauthorized"
+    put:
+      tags:
+        - User
+      summary: Porfil aktualisieren
+      requestBody:
+        description: Aktualisierte Daten
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                placeholder:
+                  type: string
+      responses:
+        200:
+          $ref: "#/components/responses/Ok"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+  /games:
+    get:
+      tags:
+        - Game
+      summary: Spiele suchen
+      responses:
+        200:
+          description: Spiele
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  placeholder:
+                    type: string
+                    
+  /users:
+    get:
+      tags:
+        - User
+      summary: User suchen
+      responses:
+        200:
+          description: User
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  placeholder:
+                    type: string    
+        
+  /game/{id}:
+    parameters:
+      - $ref: "#/components/parameters/id"
+    get:
+      tags:
+        - Game
+      summary: Spiel
+      responses:
+        200:
+          description: Spiel
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  placeholder:
+                    type: string
+        404:
+          $ref: "#/components/responses/NotFound"    
+          
+  /list/{id}:
+    parameters:
+      - $ref: "#/components/parameters/id"
+    get:
+      tags:
+        - List
+      summary: Liste
+      responses:
+        200:
+          description: Reviews
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  placeholder:
+                    type: string
+        401:
+          $ref: "#/components/responses/Unauthorized"
+    delete:
+      tags:
+        - List
+      summary: Liste löschen
+      responses:
+        200:
+          $ref: "#/components/responses/Ok"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+  /list/{id}/{gameId}:
+    parameters:
+      - $ref: "#/components/parameters/id"
+      - $ref: "#/components/parameters/gameId"
+    put:
+      tags:
+        - List
+      summary: Spiel zu Liste hinzufügen
+      responses:
+        200:
+          $ref: "#/components/responses/Ok"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+    delete:
+      tags:
+        - List
+      summary: Spiel aus Liste entfernen
+      responses:
+        200:
+          $ref: "#/components/responses/Ok"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+
+  /review:
+    put:
+      tags:
+        - Review
+      summary: Review erstellen
+      responses:
+        200:
+          $ref: "#/components/responses/Ok"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+
+  /game/{id}/reviews:
+    parameters:
+      - $ref: "#/components/parameters/id"
+    get:
+      tags:
+        - Game
+      summary: Alle Reviews
+      responses:
+        200:
+          description: Reviews
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  placeholder:
+                    type: string
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  /list:
+    put:
+      tags:
+        - List
+      summary: Liste erzeugen
+      responses:
+        200:
+          description: Erzeugte Liste 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  text:
+                    type: string
+        401:
+          $ref: "#/components/responses/Unauthorized"
+
+
+components:
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int32
+    gameId:
+      name: gameId
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int32
+
+        
+  responses:
+    Ok:
+      description: Operation was successfull
+      content:
+        text/plain:
+          schema:
+            type: string
+    EntityAlreadyExist:
+      description: Entity already exist
+      content:
+        text/plain:
+          schema:
+            type: string
+    NotFound:
+      description: Entity not found.
+      content:
+        text/plain:
+          schema:
+            type: string
+    IllegalInput:
+      description: Illegal input for operation.
+    Unauthorized:
+      description: You are not authorized for this action
+      content:
+        text/plain:
+          schema:
+            type: string
