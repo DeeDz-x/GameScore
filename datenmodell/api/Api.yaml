@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
-  title: Studibörse
-  description: "This is the REST API specifiction for the application Studibörse"
+  title: Gamescore
+  description: "REST API"
   version: 1.0.0
 servers:
 - url: "http://127.0.0.1:8000"
@@ -12,6 +12,16 @@ paths:
       tags: 
         - Login
       summary: login
+      requestBody:
+        description: login
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                placeholder:
+                  type: string
       responses:
         200:
           description: login
@@ -27,6 +37,16 @@ paths:
       tags: 
         - Registrierung
       summary: Registrierung
+      requestBody:
+        description: Registrierungsdaten
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                placeholder:
+                  type: string
       responses:
         200:
           description: Registrierung erfolgreich
@@ -59,6 +79,16 @@ paths:
       summary: aktualisiere vergessenes Passwort
       tags: 
         - Login
+      requestBody:
+        description: Aktualisiertes Passwort
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                placeholder:
+                  type: string
       responses:
         200:
           description: Passwort aktualisiert
@@ -313,6 +343,16 @@ paths:
       tags:
         - Review
       summary: Review erstellen
+      requestBody:
+        description: Reviewbeschreibung
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                placeholder:
+                  type: string
       responses:
         200:
           $ref: "#/components/responses/Ok"
@@ -344,6 +384,16 @@ paths:
       tags:
         - List
       summary: Liste erzeugen
+      requestBody:
+        description: Listenbeschreibung
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                placeholder:
+                  type: string
       responses:
         200:
           description: Erzeugte Liste 
