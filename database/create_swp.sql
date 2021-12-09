@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2017                    */
-/* Created on:     09.12.2021 14:10:40                          */
+/* Created on:     09.12.2021 14:22:27                          */
 /*==============================================================*/
 
 
@@ -608,7 +608,7 @@ go
 
 
 
-create nonclustered index USK_PICTURE_FK on BILD
+create nonclustered index USK_PICTURE_FK on BILD (USK_ID ASC)
 go
 
 /*==============================================================*/
@@ -674,9 +674,9 @@ go
 /* Table: GAME_LIST                                             */
 /*==============================================================*/
 create table GAME_LIST (
+   LIS_ID               int                  not null,
    ID                   int                  not null,
-   GAM_ID               int                  not null,
-   constraint PK_GAME_LIST primary key (ID, GAM_ID)
+   constraint PK_GAME_LIST primary key (LIS_ID, ID)
 )
 go
 
@@ -687,7 +687,7 @@ go
 
 
 
-create nonclustered index GEHORT_FK on GAME_LIST (ID ASC)
+create nonclustered index GEHORT_FK on GAME_LIST (LIS_ID ASC)
 go
 
 /*==============================================================*/
@@ -697,7 +697,7 @@ go
 
 
 
-create nonclustered index GEHORT_FK2 on GAME_LIST (GAM_ID ASC)
+create nonclustered index GEHORT_FK2 on GAME_LIST (ID ASC)
 go
 
 /*==============================================================*/
@@ -1021,12 +1021,12 @@ alter table GAME
 go
 
 alter table GAME_LIST
-   add constraint FK_GAME_LIS_GEHÖRT_GAME foreign key (GAM_ID)
+   add constraint FK_GAME_LIS_GEHÖRT_GAME foreign key (ID)
       references GAME (ID)
 go
 
 alter table GAME_LIST
-   add constraint FK_GAME_LIS_GEHÖRT_LISTE foreign key (ID)
+   add constraint FK_GAME_LIS_GEHÖRT_LISTE foreign key (LIS_ID)
       references LISTE (ID)
 go
 
