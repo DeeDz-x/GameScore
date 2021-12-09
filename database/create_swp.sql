@@ -1,8 +1,22 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2017                    */
-/* Created on:     30.11.2021 12:46:56                          */
+/* Created on:     09.12.2021 14:10:40                          */
 /*==============================================================*/
 
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('BEWERTUNG') and o.name = 'FK_BEWERTUN_BEWERTUNG_REVIEW')
+alter table BEWERTUNG
+   drop constraint FK_BEWERTUN_BEWERTUNG_REVIEW
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('BEWERTUNG') and o.name = 'FK_BEWERTUN_BEWERTUNG_PROFIL')
+alter table BEWERTUNG
+   drop constraint FK_BEWERTUN_BEWERTUNG_PROFIL
+go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
@@ -13,23 +27,16 @@ go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('BILD') and o.name = 'FK_BILD_PROFIL_PI_PROFIL')
+alter table BILD
+   drop constraint FK_BILD_PROFIL_PI_PROFIL
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
    where r.fkeyid = object_id('BILD') and o.name = 'FK_BILD_USK_PICTU_USK')
 alter table BILD
    drop constraint FK_BILD_USK_PICTU_USK
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('BILD') and o.name = 'FK_BILD_GEHÖRT_PROFIL')
-alter table BILD
-   drop constraint FK_BILD_GEHÖRT_PROFIL
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('GAME') and o.name = 'FK_GAME_GAME_GAME_GAME')
-alter table GAME
-   drop constraint FK_GAME_GAME_GAME_GAME
 go
 
 if exists (select 1
@@ -62,9 +69,16 @@ go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('KOMMENTAR') and o.name = 'FK_KOMMENTA_COMMENT_C_KOMMENTA')
-alter table KOMMENTAR
-   drop constraint FK_KOMMENTA_COMMENT_C_KOMMENTA
+   where r.fkeyid = object_id('GAME_LIST') and o.name = 'FK_GAME_LIS_GEHÖRT_GAME')
+alter table GAME_LIST
+   drop constraint FK_GAME_LIS_GEHÖRT_GAME
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('GAME_LIST') and o.name = 'FK_GAME_LIS_GEHÖRT_LISTE')
+alter table GAME_LIST
+   drop constraint FK_GAME_LIS_GEHÖRT_LISTE
 go
 
 if exists (select 1
@@ -72,6 +86,13 @@ if exists (select 1
    where r.fkeyid = object_id('KOMMENTAR') and o.name = 'FK_KOMMENTA_COMMENT_C_KOMMENTA')
 alter table KOMMENTAR
    drop constraint FK_KOMMENTA_COMMENT_C_KOMMENTA
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('KOMMENTAR') and o.name = 'FK_KOMMENTA_KOMMENTAR_PROFIL')
+alter table KOMMENTAR
+   drop constraint FK_KOMMENTA_KOMMENTAR_PROFIL
 go
 
 if exists (select 1
@@ -79,13 +100,6 @@ if exists (select 1
    where r.fkeyid = object_id('KOMMENTAR') and o.name = 'FK_KOMMENTA_REVIEW_CO_REVIEW')
 alter table KOMMENTAR
    drop constraint FK_KOMMENTA_REVIEW_CO_REVIEW
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('LISTE') and o.name = 'FK_LISTE_GAME_LIST_GAME')
-alter table LISTE
-   drop constraint FK_LISTE_GAME_LIST_GAME
 go
 
 if exists (select 1
@@ -104,13 +118,6 @@ go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('PROFIL') and o.name = 'FK_PROFIL_GEHÖRT_BILD')
-alter table PROFIL
-   drop constraint FK_PROFIL_GEHÖRT_BILD
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
    where r.fkeyid = object_id('PROFIL') and o.name = 'FK_PROFIL_GEHÖRT_USER')
 alter table PROFIL
    drop constraint FK_PROFIL_GEHÖRT_USER
@@ -125,9 +132,23 @@ go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('REVIEW') and o.name = 'FK_REVIEW_REVIEW_PR_PROFIL')
+alter table REVIEW
+   drop constraint FK_REVIEW_REVIEW_PR_PROFIL
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
    where r.fkeyid = object_id('REVIEW') and o.name = 'FK_REVIEW_REVIEW_TI_ZEITSTAF')
 alter table REVIEW
    drop constraint FK_REVIEW_REVIEW_TI_ZEITSTAF
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('SPIELEACCOUNT') and o.name = 'FK_SPIELEAC_PROFIL_AC_PROFIL')
+alter table SPIELEACCOUNT
+   drop constraint FK_SPIELEAC_PROFIL_AC_PROFIL
 go
 
 if exists (select 1
@@ -138,10 +159,28 @@ alter table "USER"
 go
 
 if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('USK') and o.name = 'FK_USK_USK_PICTU_BILD')
-alter table USK
-   drop constraint FK_USK_USK_PICTU_BILD
+            from  sysindexes
+           where  id    = object_id('BEWERTUNG')
+            and   name  = 'BEWERTUNG_USER_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index BEWERTUNG.BEWERTUNG_USER_FK
+go
+
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('BEWERTUNG')
+            and   name  = 'BEWERTUNG_REVIEW_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index BEWERTUNG.BEWERTUNG_REVIEW_FK
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('BEWERTUNG')
+            and   type = 'U')
+   drop table BEWERTUNG
 go
 
 if exists (select 1
@@ -199,15 +238,6 @@ go
 if exists (select 1
             from  sysindexes
            where  id    = object_id('GAME')
-            and   name  = 'GAME_GAME2_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index GAME.GAME_GAME2_FK
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('GAME')
             and   name  = 'GAME_GAME_FK'
             and   indid > 0
             and   indid < 255)
@@ -231,6 +261,31 @@ if exists (select 1
 go
 
 if exists (select 1
+            from  sysindexes
+           where  id    = object_id('GAME_LIST')
+            and   name  = 'GEHORT_FK2'
+            and   indid > 0
+            and   indid < 255)
+   drop index GAME_LIST.GEHORT_FK2
+go
+
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('GAME_LIST')
+            and   name  = 'GEHORT_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index GAME_LIST.GEHORT_FK
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('GAME_LIST')
+            and   type = 'U')
+   drop table GAME_LIST
+go
+
+if exists (select 1
             from  sysobjects
            where  id = object_id('GENRE')
             and   type = 'U')
@@ -240,10 +295,10 @@ go
 if exists (select 1
             from  sysindexes
            where  id    = object_id('KOMMENTAR')
-            and   name  = 'COMMENT_COMMENT2_FK'
+            and   name  = 'KOMMENTAR_PROFIL_FK'
             and   indid > 0
             and   indid < 255)
-   drop index KOMMENTAR.COMMENT_COMMENT2_FK
+   drop index KOMMENTAR.KOMMENTAR_PROFIL_FK
 go
 
 if exists (select 1
@@ -306,15 +361,6 @@ go
 if exists (select 1
             from  sysindexes
            where  id    = object_id('PROFIL')
-            and   name  = 'GEHORT_FK2'
-            and   indid > 0
-            and   indid < 255)
-   drop index PROFIL.GEHORT_FK2
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('PROFIL')
             and   name  = 'GEHORT_FK'
             and   indid > 0
             and   indid < 255)
@@ -333,6 +379,15 @@ if exists (select 1
            where  id = object_id('PUBLISHER')
             and   type = 'U')
    drop table PUBLISHER
+go
+
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('REVIEW')
+            and   name  = 'REVIEW_PROFIL_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index REVIEW.REVIEW_PROFIL_FK
 go
 
 if exists (select 1
@@ -361,6 +416,22 @@ if exists (select 1
 go
 
 if exists (select 1
+            from  sysindexes
+           where  id    = object_id('SPIELEACCOUNT')
+            and   name  = 'PROFIL_ACCOUNT_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index SPIELEACCOUNT.PROFIL_ACCOUNT_FK
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('SPIELEACCOUNT')
+            and   type = 'U')
+   drop table SPIELEACCOUNT
+go
+
+if exists (select 1
             from  sysobjects
            where  id = object_id('SPIELE_RATING')
             and   type = 'U')
@@ -384,15 +455,6 @@ if exists (select 1
 go
 
 if exists (select 1
-            from  sysindexes
-           where  id    = object_id('USK')
-            and   name  = 'USK_PICTURE_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index USK.USK_PICTURE_FK
-go
-
-if exists (select 1
             from  sysobjects
            where  id = object_id('USK')
             and   type = 'U')
@@ -406,8 +468,60 @@ if exists (select 1
    drop table ZEITSTAFFEL
 go
 
+if exists(select 1 from systypes where name='ACCOUNTTYP')
+   execute sp_unbindrule ACCOUNTTYP
+go
+
+if exists(select 1 from systypes where name='ACCOUNTTYP')
+   drop type ACCOUNTTYP
+go
+
+if exists(select 1 from systypes where name='BEWERTUNGSWERT')
+   execute sp_unbindrule BEWERTUNGSWERT
+go
+
+if exists(select 1 from systypes where name='BEWERTUNGSWERT')
+   drop type BEWERTUNGSWERT
+go
+
 if exists(select 1 from systypes where name='NOTIFICATIONTYPE')
    drop type NOTIFICATIONTYPE
+go
+
+if exists (select 1 from sysobjects where id=object_id('R_ACCOUNTTYP') and type='R')
+   drop rule  R_ACCOUNTTYP
+go
+
+if exists (select 1 from sysobjects where id=object_id('R_BEWERTUNGSWERT') and type='R')
+   drop rule  R_BEWERTUNGSWERT
+go
+
+create rule R_ACCOUNTTYP as
+      @column in ('Steam','Origin','Playstation','Xbox')
+go
+
+create rule R_BEWERTUNGSWERT as
+      @column in ('Gut','Schlect')
+go
+
+/*==============================================================*/
+/* Domain: ACCOUNTTYP                                           */
+/*==============================================================*/
+create type ACCOUNTTYP
+   from varchar(1024) not null
+go
+
+execute sp_bindrule R_ACCOUNTTYP, ACCOUNTTYP
+go
+
+/*==============================================================*/
+/* Domain: BEWERTUNGSWERT                                       */
+/*==============================================================*/
+create type BEWERTUNGSWERT
+   from varchar(1024) not null
+go
+
+execute sp_bindrule R_BEWERTUNGSWERT, BEWERTUNGSWERT
 go
 
 /*==============================================================*/
@@ -415,6 +529,40 @@ go
 /*==============================================================*/
 create type NOTIFICATIONTYPE
    from varchar(10)
+go
+
+/*==============================================================*/
+/* Table: BEWERTUNG                                             */
+/*==============================================================*/
+create table BEWERTUNG (
+   ID                   int                  not null,
+   PRO_ID               int                  not null,
+   REV_ID               int                  not null,
+   WERT                 BEWERTUNGSWERT       not null,
+   ERSTELLUNGSDATUM     datetime             not null default GETDATE(),
+   AENDERUNGSDATUM      datetime             null,
+   constraint PK_BEWERTUNG primary key (ID)
+)
+go
+
+/*==============================================================*/
+/* Index: BEWERTUNG_REVIEW_FK                                   */
+/*==============================================================*/
+
+
+
+
+create nonclustered index BEWERTUNG_REVIEW_FK on BEWERTUNG (REV_ID ASC)
+go
+
+/*==============================================================*/
+/* Index: BEWERTUNG_USER_FK                                     */
+/*==============================================================*/
+
+
+
+
+create nonclustered index BEWERTUNG_USER_FK on BEWERTUNG (PRO_ID ASC)
 go
 
 /*==============================================================*/
@@ -460,7 +608,7 @@ go
 
 
 
-create nonclustered index USK_PICTURE_FK on BILD (USK_ID ASC)
+create nonclustered index USK_PICTURE_FK on BILD
 go
 
 /*==============================================================*/
@@ -469,7 +617,6 @@ go
 create table GAME (
    ID                   int                  not null,
    GAM_ID               int                  null,
-   GAM_ID2              int                  null,
    GEN_ID               int                  not null,
    USK_ID               int                  not null,
    PUB_ID               int                  not null,
@@ -504,16 +651,6 @@ create nonclustered index GAME_GAME_FK on GAME (GAM_ID ASC)
 go
 
 /*==============================================================*/
-/* Index: GAME_GAME2_FK                                         */
-/*==============================================================*/
-
-
-
-
-create nonclustered index GAME_GAME2_FK on GAME (GAM_ID2 ASC)
-go
-
-/*==============================================================*/
 /* Index: GENRE_GAME_FK                                         */
 /*==============================================================*/
 
@@ -531,6 +668,36 @@ go
 
 
 create nonclustered index PUBLISHER_GAME_FK on GAME (PUB_ID ASC)
+go
+
+/*==============================================================*/
+/* Table: GAME_LIST                                             */
+/*==============================================================*/
+create table GAME_LIST (
+   ID                   int                  not null,
+   GAM_ID               int                  not null,
+   constraint PK_GAME_LIST primary key (ID, GAM_ID)
+)
+go
+
+/*==============================================================*/
+/* Index: GEHORT_FK                                             */
+/*==============================================================*/
+
+
+
+
+create nonclustered index GEHORT_FK on GAME_LIST (ID ASC)
+go
+
+/*==============================================================*/
+/* Index: GEHORT_FK2                                            */
+/*==============================================================*/
+
+
+
+
+create nonclustered index GEHORT_FK2 on GAME_LIST (GAM_ID ASC)
 go
 
 /*==============================================================*/
@@ -552,7 +719,7 @@ create table KOMMENTAR (
    ID                   int                  not null,
    REV_ID               int                  not null,
    KOM_ID               int                  null,
-   KOM_ID2              int                  null,
+   PRO_ID               int                  not null,
    FREITEXT             varchar(1024)        not null,
    ERSTELLUNGS_DATUM    datetime             null default GETDATE(),
    AENDERUNGS_DATUM     datetime             null,
@@ -582,13 +749,13 @@ create nonclustered index COMMENT_COMMENT_FK on KOMMENTAR (KOM_ID ASC)
 go
 
 /*==============================================================*/
-/* Index: COMMENT_COMMENT2_FK                                   */
+/* Index: KOMMENTAR_PROFIL_FK                                   */
 /*==============================================================*/
 
 
 
 
-create nonclustered index COMMENT_COMMENT2_FK on KOMMENTAR (KOM_ID2 ASC)
+create nonclustered index KOMMENTAR_PROFIL_FK on KOMMENTAR (PRO_ID ASC)
 go
 
 /*==============================================================*/
@@ -597,10 +764,9 @@ go
 create table LISTE (
    ID                   int                  not null,
    USE_ID               int                  not null,
-   GAM_ID               int                  null,
    OEFFENTLICH          bit                  not null,
    TITEL                varchar(100)         not null,
-   ERSTELLUNGSDATUM     datetime             null default GETDATE(),
+   ERSTELLUNGSDATUM_B7B39897_7E2D_4EA7_8F52_2A3C5C63A2CC datetime             null default GETDATE(),
    constraint PK_LISTE primary key (ID)
 )
 go
@@ -650,7 +816,6 @@ create table PROFIL (
    LOGIN_STATUS         bit                  null,
    ID                   int                  not null,
    USE_ID               int                  not null,
-   BIL_ID               int                  not null,
    constraint PK_PROFIL primary key (ID)
 )
 go
@@ -666,16 +831,6 @@ create nonclustered index GEHORT_FK on PROFIL (USE_ID ASC)
 go
 
 /*==============================================================*/
-/* Index: GEHORT_FK2                                            */
-/*==============================================================*/
-
-
-
-
-create nonclustered index GEHORT_FK2 on PROFIL (BIL_ID ASC)
-go
-
-/*==============================================================*/
 /* Table: PUBLISHER                                             */
 /*==============================================================*/
 create table PUBLISHER (
@@ -683,7 +838,7 @@ create table PUBLISHER (
    NAME                 varchar(1024)        not null,
    BESCHREIBUNG         varchar(1024)        null,
    WEBSITE              varchar(1024)        null,
-   ERSTELLUNGSDATUM     datetime             null default GETDATE(),
+   ERSTELLUNGSDATUM_31C38E9B_D4BC_4B07_A4EB_A48A38517BBC datetime             null default GETDATE(),
    constraint PK_PUBLISHER primary key (ID)
 )
 go
@@ -695,6 +850,7 @@ create table REVIEW (
    ID                   int                  not null,
    ZEI_ID               int                  not null,
    GAM_ID               int                  not null,
+   PRO_ID               int                  not null,
    FREITEXT             varchar(1024)        null,
    RATING               decimal              not null,
    ERSTELLUNGS_DATUM    datetime             null default GETDATE(),
@@ -722,6 +878,38 @@ go
 
 
 create nonclustered index REVIEW_TIMESCALE_FK on REVIEW (ZEI_ID ASC)
+go
+
+/*==============================================================*/
+/* Index: REVIEW_PROFIL_FK                                      */
+/*==============================================================*/
+
+
+
+
+create nonclustered index REVIEW_PROFIL_FK on REVIEW (PRO_ID ASC)
+go
+
+/*==============================================================*/
+/* Table: SPIELEACCOUNT                                         */
+/*==============================================================*/
+create table SPIELEACCOUNT (
+   ID                   int                  not null,
+   PRO_ID               int                  not null,
+   TYP                  ACCOUNTTYP           not null,
+   AENDERDATUM          datetime             not null default GETDATE(),
+   constraint PK_SPIELEACCOUNT primary key (ID)
+)
+go
+
+/*==============================================================*/
+/* Index: PROFIL_ACCOUNT_FK                                     */
+/*==============================================================*/
+
+
+
+
+create nonclustered index PROFIL_ACCOUNT_FK on SPIELEACCOUNT (PRO_ID ASC)
 go
 
 /*==============================================================*/
@@ -768,20 +956,9 @@ go
 /*==============================================================*/
 create table USK (
    ID                   int                  not null,
-   BIL_ID               int                  not null,
    NAME                 varchar(1024)        not null,
    constraint PK_USK primary key (ID)
 )
-go
-
-/*==============================================================*/
-/* Index: USK_PICTURE_FK                                        */
-/*==============================================================*/
-
-
-
-
-create nonclustered index USK_PICTURE_FK on USK (BIL_ID ASC)
 go
 
 /*==============================================================*/
@@ -798,9 +975,24 @@ create table ZEITSTAFFEL (
 )
 go
 
+alter table BEWERTUNG
+   add constraint FK_BEWERTUN_BEWERTUNG_REVIEW foreign key (REV_ID)
+      references REVIEW (ID)
+go
+
+alter table BEWERTUNG
+   add constraint FK_BEWERTUN_BEWERTUNG_PROFIL foreign key (PRO_ID)
+      references PROFIL (ID)
+go
+
 alter table BILD
    add constraint FK_BILD_GAME_PICT_GAME foreign key (GAM_ID)
       references GAME (ID)
+go
+
+alter table BILD
+   add constraint FK_BILD_PROFIL_PI_PROFIL foreign key (PRO_ID)
+      references PROFIL (ID)
 go
 
 alter table BILD
@@ -808,18 +1000,8 @@ alter table BILD
       references USK (ID)
 go
 
-alter table BILD
-   add constraint FK_BILD_GEHÖRT_PROFIL foreign key (PRO_ID)
-      references PROFIL (ID)
-go
-
 alter table GAME
    add constraint FK_GAME_GAME_GAME_GAME foreign key (GAM_ID)
-      references GAME (ID)
-go
-
-alter table GAME
-   add constraint FK_GAME_GAME_GAME_GAME foreign key (GAM_ID2)
       references GAME (ID)
 go
 
@@ -838,24 +1020,29 @@ alter table GAME
       references USK (ID)
 go
 
+alter table GAME_LIST
+   add constraint FK_GAME_LIS_GEHÖRT_GAME foreign key (GAM_ID)
+      references GAME (ID)
+go
+
+alter table GAME_LIST
+   add constraint FK_GAME_LIS_GEHÖRT_LISTE foreign key (ID)
+      references LISTE (ID)
+go
+
 alter table KOMMENTAR
    add constraint FK_KOMMENTA_COMMENT_C_KOMMENTA foreign key (KOM_ID)
       references KOMMENTAR (ID)
 go
 
 alter table KOMMENTAR
-   add constraint FK_KOMMENTA_COMMENT_C_KOMMENTA foreign key (KOM_ID2)
-      references KOMMENTAR (ID)
+   add constraint FK_KOMMENTA_KOMMENTAR_PROFIL foreign key (PRO_ID)
+      references PROFIL (ID)
 go
 
 alter table KOMMENTAR
    add constraint FK_KOMMENTA_REVIEW_CO_REVIEW foreign key (REV_ID)
       references REVIEW (ID)
-go
-
-alter table LISTE
-   add constraint FK_LISTE_GAME_LIST_GAME foreign key (GAM_ID)
-      references GAME (ID)
 go
 
 alter table LISTE
@@ -869,11 +1056,6 @@ alter table NOTIFICATION
 go
 
 alter table PROFIL
-   add constraint FK_PROFIL_GEHÖRT_BILD foreign key (BIL_ID)
-      references BILD (ID)
-go
-
-alter table PROFIL
    add constraint FK_PROFIL_GEHÖRT_USER foreign key (USE_ID)
       references "USER" (ID)
 go
@@ -884,17 +1066,22 @@ alter table REVIEW
 go
 
 alter table REVIEW
+   add constraint FK_REVIEW_REVIEW_PR_PROFIL foreign key (PRO_ID)
+      references PROFIL (ID)
+go
+
+alter table REVIEW
    add constraint FK_REVIEW_REVIEW_TI_ZEITSTAF foreign key (ZEI_ID)
       references ZEITSTAFFEL (ID)
+go
+
+alter table SPIELEACCOUNT
+   add constraint FK_SPIELEAC_PROFIL_AC_PROFIL foreign key (PRO_ID)
+      references PROFIL (ID)
 go
 
 alter table "USER"
    add constraint FK_USER_GEHÖRT_PROFIL foreign key (PRO_ID)
       references PROFIL (ID)
-go
-
-alter table USK
-   add constraint FK_USK_USK_PICTU_BILD foreign key (BIL_ID)
-      references BILD (ID)
 go
 
