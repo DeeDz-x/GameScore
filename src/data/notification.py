@@ -59,15 +59,15 @@ Kommentar: {str(self.game)}
 
 
 class Follow_notification(Notification):
-    def __init__(self, id, text, read_date, change_date, profil):
+    def __init__(self, id, text, read_date, change_date, profile):
         super().__init__(id, text, read_date, change_date)
-        self.profil = profil
+        self.profile = profile
 
     def __str__(self):
         return f"""Kommentar Benachrichtigungen
 Benachrichtigung: {super().__str__()}
-Kommentar: {str(self.profil)}
+Kommentar: {str(self.profile)}
         """
 
     def get_comment(self):
-        return self.profil
+        return self.profile

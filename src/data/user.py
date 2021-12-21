@@ -1,7 +1,8 @@
+from datetime import datetime
 
 
 class User:
-    def __init__(self, username, e_mail, password, register_date):
+    def __init__(self, username:str, e_mail:str, password:str, register_date:datetime):
         self.username = username
         self.e_mail = e_mail
         self.password = password
@@ -19,6 +20,9 @@ Registrierungsdatum: {self.register_date}"""
 
     def get_e_mail(self):
         return self.e_mail
+
+    def set_e_mail(self, e_mail):
+        self.e_mail = e_mail
 
     def get_password(self):
         return self.password

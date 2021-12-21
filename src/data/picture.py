@@ -33,3 +33,6 @@ class Picture:
 
     def get_change_date(self):
         return self.change_date
+
+    def set_change_date(self,change_date):
+        self.change_date = change_date
