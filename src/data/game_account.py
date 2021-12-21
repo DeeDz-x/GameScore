@@ -1,16 +1,19 @@
+from datetime import datetime
+
+
 class Game_account:
 
-    def __init__(self, id, type, profile, change_date):
+    def __init__(self, id: int, type, profil: str, change_date: datetime):
         self.id = id
         self.type = type
-        self.profile = profile
+        self.profil = profil
         self.change_date = change_date
 
     def __str__(self):
         return f"""Game Account
             Spieleacount id: {self.id}
             Platform: {self.type}
-            Profil: {self.profile}
+            Profil: {self.profil}
             Änderungs Datum: {self.change_date}
             """
 
@@ -20,8 +23,8 @@ class Game_account:
     def get_type(self):
         return self.type
 
-    def get_profile(self):
-        return self.profile
+    def get_profil(self):
+        return self.profil
 
     def get_change_date(self):
         return self.change_date

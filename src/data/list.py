@@ -1,6 +1,9 @@
+from data.game import Game
+
+
 class List:
 
-    def __init__(self, id, public, title, game):
+    def __init__(self, id: int, public: bool, title: str, game: Game = None):
         self.id = id
         self.public = public
         self.title = title

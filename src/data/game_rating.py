@@ -1,6 +1,9 @@
+from datetime import datetime
+
+
 class Game_rating:
 
-    def __init__(self, id, name, min, max, step, creation_date, change_date):
+    def __init__(self, id: int, name: str, min: int, max: int, step: int, creation_date: datetime, change_date: datetime):
         self.id = id
         self.name = name
         self.min = min

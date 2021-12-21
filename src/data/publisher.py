@@ -1,6 +1,9 @@
+from data.picture import Picture
+
+
 class Publisher:
 
-    def __init__(self, name, description, website, picture):
+    def __init__(self, name: str, description: str, website: str, picture: Picture = None):
         self.name = name
         self.description = description
         self.website = website

@@ -1,7 +1,11 @@
+from datetime import datetime
+from typing import List
+
+from data.comment import Comment
 
 
 class Review:
-    def __init__(self, id, text, rating, creation_date, change_date, deleted, comments=[]):
+    def __init__(self, id: int, text: str, rating: int, creation_date: datetime, change_date: datetime, deleted: bool, comments: List[Comment] = None):
         self.id = id
         self.text = text
         self.rating = rating

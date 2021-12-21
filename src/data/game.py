@@ -1,7 +1,17 @@
+from datetime import datetime
+from datetime import date
+from typing import List
+from data.genre import Genre
+from data.picture import Picture
+from data.publisher import Publisher
+from data.usk import Usk
+
+
 class Game:
 
-    def __init__(self, name, release, description, website,
-                 creation_date, change_date, publisher, usk, picture, genre, game=[]):
+    def __init__(self, name: str, release: date, description: str, website: str,
+                 creation_date: datetime, change_date: datetime, publisher: Publisher = None,
+                 usk: Usk = None, picture: List[Picture] = None, genre: Genre = None, game: List = None):
         self.name = name
         self.release = release
         self.description = description

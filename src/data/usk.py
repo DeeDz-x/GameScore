@@ -1,6 +1,9 @@
+from data.picture import Picture
+
+
 class Usk:
 
-    def __init__(self, id, name, classification, picture):
+    def __init__(self, id: int, name: str, classification, picture: Picture = None):
         self.id = id
         self.name = name
         self.classification = classification

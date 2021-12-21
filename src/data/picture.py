@@ -1,6 +1,9 @@
+from datetime import datetime
+
+
 class Picture:
 
-    def __init__(self, id, path, priority, creation_date, change_date):
+    def __init__(self, id: int, path: str, priority: int, creation_date: datetime, change_date: datetime):
         self.id = id
         self.path = path
         self.priority = priority

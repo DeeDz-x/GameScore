@@ -1,7 +1,9 @@
+from datetime import datetime
 
 
 class Comment:
-    def __init__(self, id, text, creation_date, change_date, deleted, comments=[]):
+
+    def __init__(self, id: int, text: type, creation_date: datetime, change_date: datetime, deleted: bool, comments=[]):
         self.id = id
         self.text = text
         self.creation_date = creation_date

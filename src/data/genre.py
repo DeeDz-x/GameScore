@@ -1,6 +1,9 @@
+from datetime import datetime
+
+
 class Genre:
 
-    def __init__(self, id, name, description, creation_date):
+    def __init__(self, id: int, name: str, description: str, creation_date: datetime):
         self.id = id
         self.name = name
         self.description = description

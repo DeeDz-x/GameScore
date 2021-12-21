@@ -1,7 +1,8 @@
+from datetime import datetime
 
 
 class Notification:
-    def __init__(self, id, text, read_date, change_date):
+    def __init__(self, id: int, text: str, read_date: datetime, change_date: datetime):
         self.id = id
         self.text = text
         self.read_date = read_date
