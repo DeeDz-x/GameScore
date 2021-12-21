@@ -1,10 +1,10 @@
-class usk:
+class Usk:
 
     def __init__(self, id, name, classification, picture):
         self.id = id
         self.name = name
         self.classification = classification
-        self.picture
+        self.picture = picture
 
     def __str__(self):
         return f"""USK
@@ -12,16 +12,16 @@ class usk:
             Name: {self.name}
             Einstufung: {self.classification}
             Bild: {self.picture}
-            """    
+            """
 
-    def getId(self):
+    def get_id(self):
         return self.id
 
-    def getName(self):
+    def get_name(self):
         return self.name
 
-    def getClassification(self):
+    def get_classification(self):
         return self.classification
 
-    def getPicture(self):
+    def get_picture(self):
         return self.picture

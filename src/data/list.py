@@ -1,4 +1,4 @@
-class list:
+class List:
 
     def __init__(self, id, public, title, game):
         self.id = id
@@ -12,17 +12,16 @@ class list:
             Öffentlich: {self.public}
             Titel: {self.title}
             Spiele: {self.game}
-            """    
+            """
 
-    def getId(self):
+    def get_id(self):
         return self.id
 
-    def getPublic(self):
+    def get_public(self):
         return self.public
 
-    def getTitle(self):
+    def get_title(self):
         return self.title
 
-    def getGame(self):
+    def get_game(self):
         return self.game
-    

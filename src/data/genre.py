@@ -1,27 +1,27 @@
-class genre:
+class Genre:
 
-    def __init__(self, id, name, description, creationDate):
+    def __init__(self, id, name, description, creation_date):
         self.id = id
         self.name = name
         self.description = description
-        self.creationDate = creationDate
+        self.creation_date = creation_date
 
     def __str__(self):
         return f"""Genre
             ID: {self.id}
             Genre: {self.name}
             Beschreibung: {self.description}
-            Erstellungs Datum: {self.creationDate}
-            """    
+            Erstellungs Datum: {self.creation_date}
+            """
 
-    def getId(self):
+    def get_id(self):
         return self.id
 
-    def getName(self):
+    def get_name(self):
         return self.name
 
-    def getDescription(self):
+    def get_description(self):
         return self.description
 
-    def getcreationDate(self):
-        return self.creationDate
+    def get_creation_date(self):
+        return self.creation_date

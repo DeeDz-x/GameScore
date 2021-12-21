@@ -1,13 +1,13 @@
-class game:
+class Game:
 
-    def __init__(self, name, release, description, website, 
-            creationDate, changeDate, publisher, usk, picture, genre, game = []):
+    def __init__(self, name, release, description, website,
+                 creation_date, change_date, publisher, usk, picture, genre, game=[]):
         self.name = name
         self.release = release
         self.description = description
         self.website = website
-        self.creationDate = creationDate
-        self.changeDate = changeDate
+        self.creation_date = creation_date
+        self.change_date = change_date
         self.publisher = publisher
         self.usk = usk
         self.picture = picture
@@ -20,44 +20,44 @@ class game:
             Veröffintlichungs Datum: {self.release}
             Beschreibung: {self.description}
             Website: {self.website}
-            Erstellungs Datum: {self.creationDate}
-            Änderungs Datum: {self.changeDate}
+            Erstellungs Datum: {self.creation_date}
+            Änderungs Datum: {self.change_date}
             Publisher: {self.publisher}
             USK: {self.usk}
             Bild: {self.picture}
             Genre: {self.genre}
             DLC: {self.game}
-            """    
+            """
 
-    def getId(self):
+    def get_id(self):
         return self.name
 
-    def getrelease(self):
+    def get_release(self):
         return self.release
 
-    def getDescription(self):
+    def get_description(self):
         return self.description
 
-    def getWebsite(self):
+    def get_website(self):
         return self.website
 
-    def getCreationDate(self):
-        return self.creationDate
+    def get_creation_date(self):
+        return self.creation_date
 
-    def getChangeDate(self):
-        return self.changeDate
+    def get_change_date(self):
+        return self.change_date
 
-    def getPublisher(self):
+    def get_publisher(self):
         return self.publisher
 
-    def getUsk(self):
+    def get_usk(self):
         return self.usk
-    
-    def getPicture(self):
+
+    def get_picture(self):
         return self.picture
-    
-    def getGenre(self):
+
+    def get_genre(self):
         return self.genre
 
-    def getDlc(self)
+    def get_dlc(self):
         return self.game

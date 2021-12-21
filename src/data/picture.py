@@ -1,32 +1,32 @@
-class picture:
+class Picture:
 
-    def __init__(self, id, path, priority, creationDate, changeDate):
+    def __init__(self, id, path, priority, creation_date, change_date):
         self.id = id
         self.path = path
         self.priority = priority
-        self.creationDate = creationDate
-        self.changeDate = changeDate
+        self.creation_date = creation_date
+        self.change_date = change_date
 
     def __str__(self):
         return f"""Picture
             ID: {self.id}
             Pfad: {self.path}
             Beschreibung: {self.priority}
-            Erstellungs Datum: {self.creationDate}
-            Änderungs Datum: {self.changeDate}
-            """    
+            Erstellungs Datum: {self.creation_date}
+            Änderungs Datum: {self.change_date}
+            """
 
-    def getId(self):
+    def get_id(self):
         return self.id
 
-    def getPath(self):
+    def get_path(self):
         return self.path
 
-    def getPriority(self):
+    def get_priority(self):
         return self.priority
 
-    def getcreationDate(self):
-        return self.creationDate
+    def get_creation_date(self):
+        return self.creation_date
 
-    def getChangeDate(self):
-        return self.changeDate
+    def get_change_date(self):
+        return self.change_date

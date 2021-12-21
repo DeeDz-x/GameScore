@@ -1,4 +1,4 @@
-class publisher:
+class Publisher:
 
     def __init__(self, name, description, website, picture):
         self.name = name
@@ -12,17 +12,16 @@ class publisher:
             Beschreibung: {self.description}
             Webseite: {self.website}
             Bilder: {self.picture}
-            """    
+            """
 
-    def getName(self):
+    def get_name(self):
         return self.name
 
-    def getDescription(self):
+    def get_description(self):
         return self.description
 
-    def getWebsite(self):
+    def get_website(self):
         return self.website
 
-    def getPicture(self):
+    def get_picture(self):
         return self.picture
-    
