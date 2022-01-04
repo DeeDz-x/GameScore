@@ -4,14 +4,16 @@ from typing import List
 from data.genre import Genre
 from data.picture import Picture
 from data.publisher import Publisher
+from data.review import Review
 from data.usk import Usk
 
 
 class Game:
 
-    def __init__(self, name: str, release: date, description: str, website: str,
+    def __init__(self, id: int, name: str, release: datetime, description: str, website: str,
                  creation_date: datetime, change_date: datetime, publisher: Publisher = None,
-                 usk: Usk = None, picture: List[Picture] = None, genre: Genre = None, game: List = None):
+                 usk: Usk = None, picture: List[Picture] = None, genre: List[Genre] = None, game: List = None, review: List[Review] = None):
+        self.id = id
         self.name = name
         self.release = release
         self.description = description
@@ -23,6 +25,7 @@ class Game:
         self.picture = picture
         self.genre = genre
         self.game = game
+        self.review = review
 
     def __str__(self):
         return f"""Game
@@ -37,9 +40,13 @@ class Game:
             Bild: {self.picture}
             Genre: {self.genre}
             DLC: {self.game}
+            Reviews: {self.review}
             """
 
     def get_id(self):
+        return self.id
+
+    def get_name(self):
         return self.name
 
     def get_release(self):
@@ -71,3 +78,6 @@ class Game:
 
     def get_dlc(self):
         return self.game
+    
+    def get_review(self):
+        return self.review
