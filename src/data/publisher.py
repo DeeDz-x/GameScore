@@ -3,7 +3,8 @@ from data.picture import Picture
 
 class Publisher:
 
-    def __init__(self, name: str, description: str, website: str, picture: Picture = None):
+    def __init__(self, id: int, name: str, description: str, website: str, picture: Picture = None):
+        self.id = id
         self.name = name
         self.description = description
         self.website = website
@@ -16,6 +17,9 @@ class Publisher:
             Webseite: {self.website}
             Bilder: {self.picture}
             """
+
+    def get_id(self):
+        return self.id
 
     def get_name(self):
         return self.name

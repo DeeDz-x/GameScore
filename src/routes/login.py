@@ -13,6 +13,7 @@ def login():
 
 @blueprint.route("/logout", methods=["POST"])
 def logout():
+    #login status ändern
     return "", 200
 
 

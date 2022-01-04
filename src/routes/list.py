@@ -37,4 +37,6 @@ def create_list(id, gameid):
     return """{
   "id": 0,
   "name": "string"
+  "Öffentlich"
+  "creation_date"
 }""", 200, {"Content-Type": "application/json"}

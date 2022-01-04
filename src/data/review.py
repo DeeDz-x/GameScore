@@ -5,10 +5,11 @@ from data.comment import Comment
 
 
 class Review:
-    def __init__(self, id: int, text: str, rating: int, creation_date: datetime, change_date: datetime, deleted: bool, comments: List[Comment] = None):
+    def __init__(self, id: int, text: str, rating: int, time_played_id: int, creation_date: datetime, change_date: datetime, deleted: bool, comments: List[Comment] = None):
         self.id = id
         self.text = text
         self.rating = rating
+        self.time_played_id = time_played_id
         self.creation_date = creation_date
         self.change_date = change_date
         self.deleted = deleted
@@ -32,6 +33,9 @@ Kommentar: {self.comments}"""
 
     def get_rating(self):
         return self.rating
+
+    def get_time_played_id(self):
+        return self.time_played_id
 
     def get_creation_date(self):
         return self.creation_date
