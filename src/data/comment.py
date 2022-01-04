@@ -1,15 +1,20 @@
 from datetime import datetime
+from typing import List
+
+from routes.user import user, user_id
 
 
 class Comment:
 
-    def __init__(self, id: int, text: type, creation_date: datetime, change_date: datetime, deleted: bool, comments=[]):
+    def __init__(self, id: int, text: str, creation_date: datetime, change_date: datetime, deleted: bool, commented_on=None, comments=[], user_id=None):
         self.id = id
         self.text = text
         self.creation_date = creation_date
         self.change_date = change_date
         self.deleted = deleted
+        self.commented_on = commented_on
         self.comments = comments
+        self.user_id = user_id
 
     def __str__(self):
         return f"""Kommentar
@@ -18,7 +23,8 @@ Text: {self.text}
 Erstellungsdatum: {self.creation_date}
 Änderungsdatum: {self.change_date}
 Gelöscht?: {self.deleted}
-Kommentare: {str(self.comments)}"""
+Kommentare: {str(self.comments)}
+User id: {self.user_id}"""
 
     def get_id(self):
         return self.id
@@ -38,5 +44,11 @@ Kommentare: {str(self.comments)}"""
     def get_deleted(self):
         return self.deleted
 
+    def get_commented_on(self):
+        return self.commented_on
+
     def get_comments(self):
         return self.comments
+    
+    def get_user_id(self):
+        return self.user_id
