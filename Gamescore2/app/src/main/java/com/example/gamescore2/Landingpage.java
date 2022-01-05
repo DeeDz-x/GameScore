@@ -13,12 +13,12 @@ public class Landingpage extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landingpage);
-        ImageView profil = findViewById(R.id.profilButtonLandingpage);
+        ImageView profile = findViewById(R.id.profileButtonLandingpage);
         ImageView suche = findViewById(R.id.searchButtonLandingpage);
         ImageView plus = findViewById(R.id.plusButtonLandingpage);
         ImageView notification = findViewById(R.id.notiButtonLandingpage);
 
-        profil.setOnClickListener(this);
+        profile.setOnClickListener(this);
         suche.setOnClickListener(this);
         plus.setOnClickListener(this);
         notification.setOnClickListener(this);
@@ -29,8 +29,8 @@ public class Landingpage extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.profilButtonLandingpage:
-                Intent i = new Intent(this, Profil.class);
+            case R.id.profileButtonLandingpage:
+                Intent i = new Intent(this, ProfileView.class);
                 startActivity(i);
                 break;
             case R.id.searchButtonLandingpage:

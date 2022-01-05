@@ -13,7 +13,7 @@
         tools:context=".Landingpage">
 
         <ImageView
-            android:id="@+id/profilButtonLandingpage"
+            android:id="@+id/profileButtonLandingpage"
             android:layout_width="105dp"
             android:layout_height="105dp"
             app:layout_constraintEnd_toStartOf="@+id/searchButtonLandingpage"
@@ -38,7 +38,7 @@
             android:layout_width="105dp"
             android:layout_height="105dp"
             app:layout_constraintEnd_toStartOf="@+id/plusButtonLandingpage"
-            app:layout_constraintStart_toEndOf="@+id/profilButtonLandingpage"
+            app:layout_constraintStart_toEndOf="@+id/profileButtonLandingpage"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/gamescorelogo"
             tools:srcCompat="@tools:sample/avatars" />

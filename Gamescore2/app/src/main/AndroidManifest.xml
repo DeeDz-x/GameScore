@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gamescore2">
         <activity
+            android:name=".ProfileView"
+            android:exported="false" />
+        <activity
             android:name=".Lists"
             android:exported="false" />
         <activity
