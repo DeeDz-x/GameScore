@@ -2,18 +2,24 @@ from datetime import datetime
 
 
 class Notification:
-    def __init__(self, id: int, text: str, read_date: datetime, change_date: datetime):
+    def __init__(self, id: int, text: str, read_date: datetime, creation_date: datetime, type: str, reference, user_id=None):
         self.id = id
         self.text = text
         self.read_date = read_date
-        self.change_date = change_date
+        self.creation_date = creation_date
+        self.type = type
+        self.reference = reference
+        self.user_id = user_id
 
     def __str__(self):
         return f"""Benachrichtigungen
 id: {self.id}
 Text: {self.text}
 Gelesen am: {self.read_date}
-Änderungsdatum: {self.change_date}"""
+Erstellungsdatum: {self.creation_date}
+Typ: {self.type}
+Reference: {self.reference}
+User id: {self.user_id}"""
 
     def get_id(self):
         return self.id
@@ -24,50 +30,44 @@ Gelesen am: {self.read_date}
     def get_read_date(self):
         return self.read_date
 
-    def get_change_date(self):
-        return self.change_date
+    def get_creation_date(self):
+        return self.creation_date
+
+    def get_type(self):
+        return self.type
+
+    def get_reference(self):
+        return self.reference
+
+    def get_user_id(self):
+        return self.user_id
 
 
 class Comment_notification(Notification):
-    def __init__(self, id, text, read_date, change_date, comment):
-        super().__init__(id, text, read_date, change_date)
-        self.comment = comment
+    def __init__(self, id, text, read_date, creation_date, comment, user_id=None):
+        super().__init__(id, text, read_date, creation_date, "comment", comment, user_id)
 
     def __str__(self):
         return f"""Kommentar Benachrichtigungen
 Benachrichtigung: {super().__str__()}
-Kommentar: {str(self.comment)}
         """
-
-    def get_comment(self):
-        return self.comment
 
 
 class Game_notification(Notification):
-    def __init__(self, id, text, read_date, change_date, game):
-        super().__init__(id, text, read_date, change_date)
-        self.game = game
+    def __init__(self, id, text, read_date, creation_date, game, user_id=None):
+        super().__init__(id, text, read_date, creation_date, "game", game, user_id)
 
     def __str__(self):
-        return f"""Kommentar Benachrichtigungen
+        return f"""Spiel Benachrichtigungen
 Benachrichtigung: {super().__str__()}
-Kommentar: {str(self.game)}
         """
-
-    def get_comment(self):
-        return self.game
 
 
 class Follow_notification(Notification):
-    def __init__(self, id, text, read_date, change_date, profile):
-        super().__init__(id, text, read_date, change_date)
-        self.profile = profile
+    def __init__(self, id, text, read_date, creation_date, profile, user_id=None):
+        super().__init__(id, text, read_date, creation_date, "follow", profile, user_id)
 
     def __str__(self):
-        return f"""Kommentar Benachrichtigungen
+        return f"""Folgen Benachrichtigungen
 Benachrichtigung: {super().__str__()}
-Kommentar: {str(self.profile)}
         """
-
-    def get_comment(self):
-        return self.profile
