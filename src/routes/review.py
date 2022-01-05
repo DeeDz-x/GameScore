@@ -82,8 +82,29 @@ def delete_comment(id):
 
 
 @blueprint.route("/comment", methods=["PUT"])
-def create_comment(id):
-    return "", 200
+def create_comment():
+    if not request.is_json:
+        return "", 400
+    req = request.get_json()
+    if ("Authorization" in request.headers):
+        auth_header = request.headers["Authorization"]
+        try:
+            user_id = auth.decode(auth_header)
+        except InvalidTokenError as e:
+            print(e)
+            return "", 401
+    else:
+        return "", 401
+    if "text" in req and "commented_on_type" in req and "commented_on_id" in req:
+        comment = Comment(1, req["text"], datetime.now,
+                          datetime.now, False, req["commented_on_type"], req["commented_on_id"], user_id = user_id)
+        # if database.create_comment(comment):
+        #    return "", 200
+        # else:
+        #    return "", 409
+        return "", 200
+    else:
+        return "", 400
 
 
 @blueprint.route("/reaction/<id>", methods=["PUT"])

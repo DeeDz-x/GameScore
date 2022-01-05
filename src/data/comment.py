@@ -4,17 +4,19 @@ from typing import List
 from routes.user import user, user_id
 
 
+
 class Comment:
 
-    def __init__(self, id: int, text: str, creation_date: datetime, change_date: datetime, deleted: bool, commented_on=None, comments=[], user_id=None):
+    def __init__(self, id: int, text: str, creation_date: datetime, change_date: datetime, deleted: bool, commented_on_type: str, commented_on_id=None, comments=[], user_id=None):
         self.id = id
         self.text = text
         self.creation_date = creation_date
         self.change_date = change_date
         self.deleted = deleted
-        self.commented_on = commented_on
+        self.commented_on_id = commented_on_id
         self.comments = comments
         self.user_id = user_id
+        self.commented_on_type = commented_on_type
 
     def __str__(self):
         return f"""Kommentar
@@ -44,11 +46,14 @@ User id: {self.user_id}"""
     def get_deleted(self):
         return self.deleted
 
-    def get_commented_on(self):
-        return self.commented_on
+    def get_commented_on_id(self):
+        return self.commented_on_id
 
     def get_comments(self):
         return self.comments
-    
+
     def get_user_id(self):
         return self.user_id
+
+    def get_commend_on_type(self):
+        return self.commented_on_type
