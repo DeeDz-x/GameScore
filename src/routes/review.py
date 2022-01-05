@@ -1,6 +1,7 @@
 from datetime import datetime
 from flask import Blueprint, request, jsonify
 from jwt.exceptions import InvalidTokenError
+from data.review import Review
 from util import auth
 from data.comment import Comment
 
@@ -8,8 +9,20 @@ blueprint = Blueprint("review", __name__)
 
 
 @blueprint.route("/review", methods=["PUT"])
-def review():
-    return "", 200
+def create_review():
+    if not request.is_json:
+        return "", 400
+    req = request.get_json()
+    if "id" in req and "text" in req and "rating" in req and "time played" in req:
+        review = Review(1, req["text"], req["rating"],
+                        req["time played"], datetime.now, datetime.now, False)
+        # if database.create_review(review):
+        #    return "", 200
+        # else:
+        #    return "", 409
+        return "", 200
+    else:
+        return "", 400
 
 
 @blueprint.route("/time_played", methods=["GET"])
@@ -58,7 +71,7 @@ def delete_comment(id):
         try:
             user_id = auth.decode(auth_header)
             if user_id != c_user_id:
-                return "",401
+                return "", 401
         except InvalidTokenError as e:
             print(e)
             return "", 401

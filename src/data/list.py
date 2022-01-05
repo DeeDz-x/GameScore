@@ -1,9 +1,10 @@
 from data.game import Game
+from typing import List
 
 
 class List:
 
-    def __init__(self, id: int, public: bool, title: str, game: Game = None):
+    def __init__(self, id: int, public: bool, title: str, game: List[Game] = None):
         self.id = id
         self.public = public
         self.title = title
@@ -28,3 +29,9 @@ class List:
 
     def get_game(self):
         return self.game
+
+    def clear_game(self):
+        self.game_accounts = []
+
+    def add_game(self, game: Game):
+        self.game.append(game)
