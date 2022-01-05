@@ -2,6 +2,8 @@ from flask import Blueprint, request, jsonify
 from datetime import datetime
 from data.game import Game
 from data.list import List
+from jwt.exceptions import InvalidTokenError
+from util import auth
 
 blueprint = Blueprint("list", __name__)
 
@@ -25,6 +27,19 @@ def list(id):
 
 @blueprint.route("/list/<id>", methods=["DELETE"])
 def delete_list(id):
+    c_user_id = 1  # database.get_list_by_id().get_user_id()
+    if ("Authorization" in request.headers):
+        auth_header = request.headers["Authorization"]
+        try:
+            user_id = auth.decode(auth_header)
+            if user_id != c_user_id:
+                return "", 401
+        except InvalidTokenError as e:
+            print(e)
+            return "", 401
+    else:
+        return "", 401
+    # database.delete_list(id)
     return "", 200
 
 
@@ -46,6 +61,19 @@ def add_game(id, gameid):
 
 @blueprint.route("/list/<id>/<gameid>", methods=["DELETE"])
 def delete_game(id, gameid):
+    c_user_id = 1  # database.get_list_by_id().get_user_id()
+    if ("Authorization" in request.headers):
+        auth_header = request.headers["Authorization"]
+        try:
+            user_id = auth.decode(auth_header)
+            if user_id != c_user_id:
+                return "", 401
+        except InvalidTokenError as e:
+            print(e)
+            return "", 401
+    else:
+        return "", 401
+    # database.delete_game_in_list(id,gameid)
     return "", 200
 
 
