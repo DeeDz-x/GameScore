@@ -4,6 +4,7 @@ from jwt.exceptions import InvalidTokenError
 from data.review import Review
 from util import auth
 from data.comment import Comment
+from data.time_played import Time_played
 
 blueprint = Blueprint("review", __name__)
 
@@ -27,14 +28,13 @@ def create_review():
 
 @blueprint.route("/time_played", methods=["GET"])
 def time_played():
-    return """[
-  {
-    "id": 0,
-    "unit": "string",
-    "from": "string",
-    "until": "string"
-  }
-]""", 200, {"Content-Type": "application/json"}
+    # database.get_all_time_played()
+    all_time_played = [Time_played(1, "h", 2, 5)]
+    res = []
+    for time_played in all_time_played:
+        res.append({"id": time_played.get_id(), "unit": time_played.get_unit(
+        ), "from": time_played.get_start(), "until": time_played.get_end()})
+    return jsonify(res), 200, {"Content-Type": "application/json"}
 
 
 @blueprint.route("/comment/<id>", methods=["GET"])
