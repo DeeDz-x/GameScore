@@ -97,7 +97,7 @@ def create_comment():
         return "", 401
     if "text" in req and "commented_on_type" in req and "commented_on_id" in req:
         comment = Comment(1, req["text"], datetime.now,
-                          datetime.now, False, req["commend_on_type"], req["commend_on_id"], user_id = user_id)
+                          datetime.now, False, req["commented_on_type"], req["commented_on_id"], user_id = user_id)
         # if database.create_comment(comment):
         #    return "", 200
         # else:
