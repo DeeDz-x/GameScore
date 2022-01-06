@@ -1,7 +1,7 @@
 from click.decorators import pass_obj
 import pymssql
 
-server="192.168.178.64"
+server="192.168.2.197"
 user="sa"
 db_password="Duefelsiek1!"
 database = "SWP"
@@ -17,14 +17,16 @@ def login(e_mail,password):
     if (res is not None):
         res, = res
     cur.execute(query_update,(res,))
+    con.commit()
     cur.close()
     con.close()
     return res
 
 def logout(id):
-    query_update = "UPDATE PROFIL SET LOGIN_STATUS = 1 WHERE USE_ID = %s"
+    query_update = "UPDATE PROFIL SET LOGIN_STATUS = 0 WHERE USE_ID = %s"
     con = pymssql.connect(server=server, user=user, password=db_password,database = database)
     cur = con.cursor()
     cur.execute(query_update,(id,))
+    con.commit()
     cur.close()
     con.close()
