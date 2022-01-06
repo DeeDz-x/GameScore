@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask import Blueprint, request, jsonify
 from data.user import User
-from database.database import database
+from database import database
 
 
 blueprint = Blueprint("register", __name__)
