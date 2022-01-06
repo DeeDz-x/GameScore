@@ -1,19 +1,20 @@
 from flask import Blueprint, request, jsonify
 from util import auth
 from jwt.exceptions import InvalidTokenError
-#from database.database import database
+from database import database
 
 blueprint = Blueprint("login", __name__)
 
 
 @blueprint.route("/login", methods=["POST"])
 def login():
-    if not request.is_json:
+    if (not request.is_json):
         return "", 400
     req = request.get_json()
-    if "e_mail" in req and "password" in req:
-        user_id = 1#database.login(req["e_mail"],req["password"])
-        return auth.encode(user_id),200
+    if ("e_mail" in req and "password" in req):
+        user_id = database.login(req["e_mail"],req["password"])
+        if (user_id is not None):
+            return auth.encode(user_id),200
     return "", 404
 
 
@@ -27,7 +28,7 @@ def logout():
             print(e)
             return "", 200
         print(user_id)
-        #database.logout(user_id)
+        database.logout(user_id)
     return "", 200
 
 
