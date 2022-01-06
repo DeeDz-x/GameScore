@@ -1,5 +1,5 @@
-from click.decorators import pass_obj
 import pymssql
+from data.user import User
 
 server="192.168.2.197"
 user="sa"
@@ -30,3 +30,22 @@ def logout(id):
     con.commit()
     cur.close()
     con.close()
+
+def create_user(user:User):
+    query_mail = "SELECT COUNT(*) FROM [USER] WHERE E_MAIL = %s" 
+    query_user = "INSERT INTO [USER] (E_MAIL,PASSWORT,REGISTRIEUNGSDATUM, USERNAME) VALUES (%s,%s,%s,%s)"
+    query_profile = "INSERT INTO PROFIL (LOGIN_STATUS, [NAME],use_id) VALUES (0,%s,)"
+    con = pymssql.connect(server=server, user=user, password=db_password,database = database)
+    cur = con.cursor()
+    res, = cur.execute(query_mail,(user.get_e_mail(),))
+    if (res > 0):
+        cur.close()
+        con.close()
+        return False
+    cur.execute(query_user,(user.get_e_mail(),user.get_password(),user.get_register_date,user.get_username()))
+    res = cur.fetchone()
+    cur.execute(query_profile,res)
+    con.commit()
+    cur.close()
+    con.close()
+    return True
