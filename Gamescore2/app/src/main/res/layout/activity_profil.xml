@@ -44,7 +44,8 @@
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/nameProfil" />
+            app:layout_constraintTop_toBottomOf="@+id/nameProfil"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
             android:id="@+id/ageProfil"
@@ -56,7 +57,8 @@
             android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/usernameProfil" />
+            app:layout_constraintTop_toBottomOf="@+id/usernameProfil"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
             android:id="@+id/regionProfil"
@@ -68,7 +70,8 @@
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/ageProfil" />
+            app:layout_constraintTop_toBottomOf="@+id/ageProfil"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/headerFavoriteGamesProfil"
@@ -92,7 +95,8 @@
             android:inputType="textMultiLine"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/headerFavoriteGamesProfil" />
+            app:layout_constraintTop_toBottomOf="@+id/headerFavoriteGamesProfil"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/headerAboutMeProfil"
@@ -117,7 +121,8 @@
             android:inputType="textMultiLine"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/headerAboutMeProfil" />
+            app:layout_constraintTop_toBottomOf="@+id/headerAboutMeProfil"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <EditText
             android:id="@+id/platform1Profil"
@@ -130,7 +135,8 @@
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/headerPlatformsProfil" />
+            app:layout_constraintTop_toBottomOf="@+id/headerPlatformsProfil"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
             android:id="@+id/platform2Profil"
@@ -154,7 +160,8 @@
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/platform2Profil" />
+            app:layout_constraintTop_toBottomOf="@+id/platform2Profil"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
             android:id="@+id/platform4Profil"
@@ -166,7 +173,8 @@
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/platform3Profil" />
+            app:layout_constraintTop_toBottomOf="@+id/platform3Profil"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/headerPlatformsProfil"

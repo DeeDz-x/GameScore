@@ -22,7 +22,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBarGameprofil" />
+            app:layout_constraintTop_toBottomOf="@+id/ratingBarGameprofil"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <EditText
             android:id="@+id/bestReviewGameprofil2"
@@ -35,7 +36,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bestReviewGameprofil" />
+            app:layout_constraintTop_toBottomOf="@+id/bestReviewGameprofil"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <ImageView
             android:id="@+id/gameGameprofil"
@@ -94,7 +96,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/publisherGameprofil" />
+            app:layout_constraintTop_toBottomOf="@+id/publisherGameprofil"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <RatingBar
             android:id="@+id/ratingBarGameprofil"
