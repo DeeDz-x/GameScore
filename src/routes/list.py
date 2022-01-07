@@ -4,6 +4,7 @@ from data.game import Game
 from data.list import List
 from jwt.exceptions import InvalidTokenError
 from util import auth
+from database import database
 
 blueprint = Blueprint("list", __name__)
 
@@ -51,7 +52,6 @@ def add_game(id, gameid):
                 "Ein Test spiel", "Test Website", datetime.now(), datetime.now())])  # database.get_list_by_id()
     req = request.get_json()
     if "game" in req:
-        # list.clear_game()
         for gem in req["game"]:
             list.add_game(Game(gem["id"], gem["name"], gem["release"], gem["description"],
                           gem["website"], gem["creation_date"], gem["change_date"]))
@@ -79,15 +79,21 @@ def delete_game(id, gameid):
 
 @blueprint.route("/list", methods=["PUT"])
 def create_list():
+    if ("Authorization" in request.headers):
+        auth_header = request.headers["Authorization"]
+        try:
+            user_id = auth.decode(auth_header)
+        except InvalidTokenError as e:
+            print(e)
+            return "", 200
     if not request.is_json:
         return "", 400
     req = request.get_json()
-    if "id" in req and "name" in req and "öffentlich" in req:
-        list = List(1, req["name"], req["öffentlich"], datetime.now())
-        # if database.create_list(list):
-        #    return "", 200
-        # else:
-        #    return "", 409
-        return "", 200
+    if "name" in req and "public" in req:
+        list = List(1, req["public"], req["name"], datetime.now())
+        if database.create_list(list,user_id):
+            return "", 200
+        else:
+            return "", 409
     else:
         return "", 400

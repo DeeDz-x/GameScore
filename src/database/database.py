@@ -1,7 +1,9 @@
+
 import pymssql
 from data.game_account import Game_account
 from data.profile import Profile
 from data.user import User
+from data.list import List
 
 server = "192.168.2.197"
 db_user = "sa"
@@ -95,8 +97,10 @@ def get_user(id):
     con.close()
     return profile
 
+
 def update_user(profile):
     query = ""
+
 
 def search_users(username):
     query = "select * from PROFIL where PROFIL.NAME like %s"
@@ -106,7 +110,20 @@ def search_users(username):
     cur.execute(query, (username,))
     profile_list = []
     for profile in cur:
-        profile_list.append(Profile(profile[0], profile[1], profile[2], profile[3], profile[4], profile[5]))
+        profile_list.append(
+            Profile(profile[0], profile[1], profile[2], profile[3], profile[4], profile[5]))
     cur.close()
     con.close()
     return profile_list
+
+
+def create_list(list: List, user_id):
+    query = "INSERT INTO LISTE (TITEL, OEFFENTLICH, USE_ID) VALUES (%s,%s,%s)"
+    con = pymssql.connect(server=server, user=db_user,
+                          password=db_password, database=database)
+    cur = con.cursor()
+    cur.execute(query, (list.get_title(), list.get_public(), user_id))
+    con.commit()
+    cur.close()
+    con.close()
+    return True
