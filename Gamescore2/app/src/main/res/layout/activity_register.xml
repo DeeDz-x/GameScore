@@ -43,7 +43,8 @@
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/emailRegister"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/confirmPassword"
