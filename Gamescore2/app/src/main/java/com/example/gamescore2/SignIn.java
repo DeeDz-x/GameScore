@@ -53,13 +53,12 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
         Log.d("test", password.getText().toString());
 
         if (email.getText().toString() != null && password.getText().toString() != null) {
-            Intent intent = new Intent(this, Landingpage.class);
-                startActivity(intent);
             sendLogin(email.getText().toString(), password.getText().toString());
-//            if (key != null) {
-//                Intent intent = new Intent(this, Landingpage.class);
-//                startActivity(intent);
-//            }
+
+            if (key != null) {
+                Intent intent = new Intent(this, Landingpage.class);
+                startActivity(intent);
+            }
 
         }
     }
