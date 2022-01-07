@@ -5,7 +5,7 @@ from data.picture import Picture
 
 
 class Profile:
-    def __init__(self, login_status: bool, age: int, country: str, name: str, bio: str, favorite_game_id: int, game_accounts: List[Game_account] = None, picture: Picture = None, user: User = None):
+    def __init__(self, login_status: bool, age: int, country: str, name: str, bio: str, favorite_game_id: int, game_accounts: List[Game_account] = [], picture: Picture = None, user: User = None):
         self.login_status = login_status
         self.age = age
         self.country = country
