@@ -1,9 +1,6 @@
 from datetime import datetime
 from typing import List
 
-from routes.user import user, user_id
-
-
 
 class Comment:
 
