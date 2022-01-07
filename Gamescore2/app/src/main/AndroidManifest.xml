@@ -13,6 +13,9 @@
             android:name=".ProfileView"
             android:exported="false" />
         <activity
+            android:name=".GameProfil"
+            android:exported="false" />
+        <activity
             android:name=".Lists"
             android:exported="false" />
         <activity
