@@ -64,14 +64,15 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void sendLogin(String mEmail, String mPassword) {
+        Log.d("test", "klappt");
 
         mApiService.sendLogin(new LoginRequest(mEmail, mPassword)).enqueue(new Callback<Login>() {
             @Override
             public void onResponse(Call<Login> call, Response<Login> response) {
                 if(response.isSuccessful()) {
-                    System.out.println("ja");
+                    Log.d("test", "klappt");
                 } else {
-                    System.out.println("nein");
+                    Log.d("test", "klappt nicht");
                 }
 
             }
