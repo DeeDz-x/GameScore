@@ -12,8 +12,10 @@ import android.widget.EditText;
 
 import java.util.List;
 
+import data.models.LogRequest;
 import data.models.Login;
 import data.models.LoginRequest;
+import data.models.LoginResponse;
 import data.remotes.ApiUtils;
 import data.remotes.ApiService;
 import retrofit2.Call;
@@ -27,6 +29,8 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
     static Login apiKey;
     private String key;
     EditText email, password;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +70,27 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
     private void sendLogin(String mEmail, String mPassword) {
         Log.d("test", "klappt");
 
-        mApiService.sendLogin(new LoginRequest(mEmail, mPassword)).enqueue(new Callback<Login>() {
+//        mApiService.sendLogin(new LoginRequest(mEmail, mPassword)).enqueue(new Callback<Login>() {
+//            @Override
+//            public void onResponse(Call<Login> call, Response<Login> response) {
+//                if(response.isSuccessful()) {
+//                    Log.d("test", "klappt");
+//                } else {
+//                    Log.d("test", "klappt nicht");
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Login> call, Throwable t) {
+//                System.out.println("Exception: " + t);
+//                Log.e(TAG, "Unable to submit login to API.");
+//            }
+//
+//        });
+        mApiService.postJson("{'password': 'jason', 'e_mail': 'hallo@jason.de' }").enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<Login> call, Response<Login> response) {
+            public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()) {
                     Log.d("test", "klappt");
                 } else {
@@ -78,7 +100,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
             }
 
             @Override
-            public void onFailure(Call<Login> call, Throwable t) {
+            public void onFailure(Call<String> call, Throwable t) {
                 System.out.println("Exception: " + t);
                 Log.e(TAG, "Unable to submit login to API.");
             }
