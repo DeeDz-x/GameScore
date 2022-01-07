@@ -12,7 +12,7 @@ class Game:
 
     def __init__(self, id: int, name: str, release: datetime, description: str, website: str,
                  creation_date: datetime, change_date: datetime, publisher: Publisher = None,
-                 usk: Usk = None, picture: List[Picture] = None, genre: List[Genre] = None, game: List = None, review: List[Review] = None):
+                 usk: Usk = None, picture: List[Picture] = None, genre: Genre = None, game: List = None, review: List[Review] = None):
         self.id = id
         self.name = name
         self.release = release
