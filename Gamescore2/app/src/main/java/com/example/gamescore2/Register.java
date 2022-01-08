@@ -63,15 +63,21 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
        // Log.d("test", "username: " + username.getText().toString() + " email: "+ email.getText().toString() + " password: " + password.getText().toString());
 
         if (!email.getText().toString().equals(confirmEmail.getText().toString())){
+           //email.getText().clear();
+           confirmEmail.getText().clear();
             EmailMatchDialog emailMatchDialog = new EmailMatchDialog();
             emailMatchDialog.show(getSupportFragmentManager(),"dialog email do not match");
 
+
         }
-        if (!password.getText().toString().equals(confirmPassword.getText().toString())){
+        else if (!password.getText().toString().equals(confirmPassword.getText().toString())){
+//            password.getText().clear();
+            confirmPassword.getText().clear();
             PasswordMatchDialog passwordMatchDialog = new PasswordMatchDialog();
             passwordMatchDialog.show(getSupportFragmentManager(),"dialog password do not match");
+
         }
-        if (email.getText().toString().equals(confirmEmail.getText().toString())&& password.getText().toString().equals(confirmPassword.getText().toString())
+        else if(email.getText().toString().equals(confirmEmail.getText().toString())&& password.getText().toString().equals(confirmPassword.getText().toString())
                 && username.getText().toString() != null) {
             sendRegister(email.getText().toString(), password.getText().toString(), username.getText().toString());
 
