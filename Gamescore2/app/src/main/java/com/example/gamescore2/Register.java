@@ -12,6 +12,7 @@ import android.widget.EditText;
 
 import com.example.gamescore2.Dialogs.EmailMatchDialog;
 import com.example.gamescore2.Dialogs.FillFormDialog;
+import com.example.gamescore2.Dialogs.LengthDialog;
 import com.example.gamescore2.Dialogs.PasswordMatchDialog;
 
 import org.json.JSONObject;
@@ -81,20 +82,21 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         else if (!password.getText().toString().equals(confirmPassword.getText().toString())){
 //            password.getText().clear();
             confirmPassword.getText().clear();
+            password.getText().clear();
             PasswordMatchDialog passwordMatchDialog = new PasswordMatchDialog();
             passwordMatchDialog.show(getSupportFragmentManager(),"dialog password do not match");
-
+        }
+        else if(username.getText().toString().length() < 3 || password.getText().toString().length() < 3){
+            confirmPassword.getText().clear();
+            password.getText().clear();
+            LengthDialog lengthDialog = new LengthDialog();
+            lengthDialog.show(getSupportFragmentManager(), "dialog length to short");
         }
         else if(email.getText().toString().equals(confirmEmail.getText().toString())&& password.getText().toString().equals(confirmPassword.getText().toString())
-                && !username.getText().toString().equals(null)) {
+                ) {
             sendRegister(email.getText().toString(), password.getText().toString(), username.getText().toString());
             Intent intent = new Intent(this,SignIn.class);
             startActivity(intent);
-
-
-
-
-
 
 
     }
