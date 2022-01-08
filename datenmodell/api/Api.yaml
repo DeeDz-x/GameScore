@@ -1,0 +1,1065 @@
+openapi: 3.0.3
+info:
+  title: Gamescore
+  description: "REST API"
+  version: 1.0.0
+servers:
+- url: "http://127.0.0.1:8000"
+  description: "Development server"
+paths:
+  /login:
+    post:
+      tags: 
+        - Login
+      summary: login
+      requestBody:
+        description: login
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                e_mail:
+                  type: string
+      responses:
+        200:
+          description: authentifikation token
+          content:
+            text/plain:
+              schema:
+                type: string
+        404:
+          $ref: "#/components/responses/NotFound"
+  /logout:
+    post:
+      tags: 
+        - Login
+      summary: Logout
+      responses:
+        200:
+          $ref: "#/components/responses/Ok"
+  
+  /register:
+    post:
+      tags: 
+        - Registrierung
+      summary: Registrierung
+      requestBody:
+        description: Registrierungsdaten
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                e_mail:
+                  type: string
+                username:
+                  type: string
+      responses:
+        200:
+          $ref: "#/components/responses/Ok"
+        409:
+          $ref: "#/components/responses/EntityAlreadyExist"
+          
+  /forgot:
+    post:
+      summary: Passwort vergessen
+      tags: 
+        - Login
+      responses:
+        200:
+          description: Passwort vergessen
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  e-mail:
+                    type: string
+  /update_password:
+    post:
+      summary: aktualisiere vergessenes Passwort
+      tags: 
+        - Login
+      requestBody:
+        description: Aktualisiertes Passwort
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+      responses:
+        200:
+          $ref: "#/components/responses/Ok"
+  /popular_games:
+    get:
+      summary: Beliebte Spiele
+      tags:
+        - Game
+      responses:
+        200:
+          description: Beliebte Spiele
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                    releaseyear:
+                      type: string
+                    description:
+                      type: string
+                    website:
+                      type: string
+                    creationdate:
+                      type: string
+                    changedate:
+                      type: string
+                    average_rating:
+                      type: number
+                    picture:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          priority:
+                            type: number
+                          path:
+                            type: string
+                    genre:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                    publisher:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                        website:
+                          type: string
+                        picture:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            path:
+                              type: string
+                    usk:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                        classification:
+                          type: number
+                        picture:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            path:
+                              type: string
+
+  /notifications:
+    get:
+      summary: Benachrichtigungen
+      tags:
+        - Benachrichtigung
+      responses:
+        200:
+          description: Benachrichtigungen
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    text:
+                      type: string
+                    read_date:
+                      type: string
+                    creation_date:
+                      type: string
+                    type:
+                      type: string
+                    reference_id:
+                      type: string
+        401:
+          $ref: "#/components/responses/Unauthorized"
+          
+  /notification/{id}:
+    parameters:
+      - $ref: "#/components/parameters/id"
+    delete:
+      summary: Benachrichtigung als gelesen markieren
+      tags:
+        - Benachrichtigung
+      responses:
+        200:
+          $ref: "#/components/responses/Ok"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+ 
+  /social:
+    get:
+      tags:
+        - Social
+      summary: Kommentare von Freunden
+      responses:
+        200:
+          description: Kommentare von Freunden
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    text:
+                      type: string
+                    rating:
+                      type: number
+                    game_id:
+                      type: number
+                    game_name:
+                      type: string
+                    user_id:
+                      type: number
+                    user_picture:
+                      type: string
+        401:
+          $ref: "#/components/responses/Unauthorized"
+  /new_games:
+    get:
+      tags:
+        - Game
+      summary: Neu erschienene Spiele
+      responses:
+        200:
+          description: Neu erschienene Spiele
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                    releaseyear:
+                      type: string
+                    description:
+                      type: string
+                    website:
+                      type: string
+                    creationdate:
+                      type: string
+                    changedate:
+                      type: string
+                    average_rating:
+                      type: number
+                    picture:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          priority:
+                            type: number
+                          path:
+                            type: string
+                    genre:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                    publisher:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                        website:
+                          type: string
+                        picture:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            path:
+                              type: string
+                    usk:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                        classification:
+                          type: number
+                        picture:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            path:
+                              type: string
+          
+  /user/{id}:
+    parameters:
+      - $ref: "#/components/parameters/id"
+    get:
+      tags:
+        - User
+      summary: Profil des angegebenen Users
+      responses:
+        200:
+          description: Profil des angegebenen Users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  login_status:
+                    type: boolean
+                  country:
+                    type: string
+                  name:
+                    type: string
+                  bio:
+                    type: string
+                  favorite_game_id:
+                    type: number
+                  picture:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      path:
+                        type: string
+                  accounts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        type:
+                          type: string
+                        profil:
+                          type: string
+        404:
+          $ref: "#/components/responses/NotFound"
+  /user:
+    get:
+      tags:
+        - User
+      summary: Eigenes Profil
+      responses:
+        200:
+          description: Profil des angegebenen Users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  login_status:
+                    type: boolean
+                  age:
+                    type: number
+                  country:
+                    type: string
+                  name:
+                    type: string
+                  bio:
+                    type: string
+                  favorite_game_id:
+                    type: number
+                  username:
+                    type: string
+                  e_mail:
+                    type: string
+                  picture:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      path:
+                        type: string
+                  accounts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        type:
+                          type: string
+                        profil:
+                          type: string
+        401:
+          $ref: "#/components/responses/Unauthorized"
+    put:
+      tags:
+        - User
+      summary: Porfil aktualisieren
+      requestBody:
+        description: Aktualisierte Daten
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                age:
+                  type: number
+                country:
+                  type: string
+                name:
+                  type: string
+                bio:
+                  type: string
+                favorite_game_id:
+                  type: number
+                e_mail:
+                  type: string
+                accounts:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      type:
+                        type: string
+                      profil:
+                        type: string
+                picture:
+                  type: string
+      responses:
+        200:
+          $ref: "#/components/responses/Ok"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+  /games:
+    get:
+      tags:
+        - Game
+      summary: Spiele suchen
+      responses:
+        200:
+          description: Spiele
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                    releaseyear:
+                      type: string
+                    description:
+                      type: string
+                    website:
+                      type: string
+                    creationdate:
+                      type: string
+                    changedate:
+                      type: string
+                    average_rating:
+                      type: number
+                    picture:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          priority:
+                            type: number
+                          path:
+                            type: string
+                    genre:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                    publisher:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                        website:
+                          type: string
+                        picture:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            path:
+                              type: string
+                    usk:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                        classification:
+                          type: number
+                        picture:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            path:
+                              type: string
+  /users:
+    get:
+      tags:
+        - User
+      summary: User suchen
+      responses:
+        200:
+          description: User
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    login_status:
+                      type: boolean
+                    country:
+                      type: string
+                    name:
+                      type: string
+                    favorite_game_id:
+                      type: number
+                    picture:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        path:
+                          type: string  
+      
+  /game/{id}:
+    parameters:
+      - $ref: "#/components/parameters/id"
+    get:
+      tags:
+        - Game
+      summary: Spiel
+      responses:
+        200:
+          description: Spiel
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  name:
+                    type: string
+                  releaseyear:
+                    type: string
+                  description:
+                    type: string
+                  website:
+                    type: string
+                  creationdate:
+                    type: string
+                  changedate:
+                    type: string
+                  average_rating:
+                    type: number
+                  picture:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        priority:
+                          type: number
+                        path:
+                          type: string
+                  genre:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      name:
+                        type: string
+                  publisher:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      name:
+                        type: string
+                      website:
+                        type: string
+                      picture:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          path:
+                            type: string
+                  usk:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      name:
+                        type: string
+                      classification:
+                        type: number
+                      picture:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          path:
+                            type: string
+                  reviewselection:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        text:
+                          type: string
+                        rating:
+                          type: number
+        404:
+          $ref: "#/components/responses/NotFound"    
+          
+  /list/{id}:
+    parameters:
+      - $ref: "#/components/parameters/id"
+    get:
+      tags:
+        - List
+      summary: Liste
+      responses:
+        200:
+          description: Reviews
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  name:
+                    type: string
+                  games:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+        401:
+          $ref: "#/components/responses/Unauthorized"
+    delete:
+      tags:
+        - List
+      summary: Liste löschen
+      responses:
+        200:
+          $ref: "#/components/responses/Ok"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+  /list/{id}/{gameId}:
+    parameters:
+      - $ref: "#/components/parameters/id"
+      - $ref: "#/components/parameters/gameId"
+    put:
+      tags:
+        - List
+      summary: Spiel zu Liste hinzufügen
+      responses:
+        200:
+          $ref: "#/components/responses/Ok"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+    delete:
+      tags:
+        - List
+      summary: Spiel aus Liste entfernen
+      responses:
+        200:
+          $ref: "#/components/responses/Ok"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+
+  /review:
+    put:
+      tags:
+        - Review
+      summary: Review erstellen
+      requestBody:
+        description: Reviewbeschreibung
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                rating:
+                  type: number
+                game_id:
+                  type: number
+                time_played_id:
+                  type: number
+      responses:
+        200:
+          $ref: "#/components/responses/Ok"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+
+  /game/{id}/reviews:
+    parameters:
+      - $ref: "#/components/parameters/id"
+    get:
+      tags:
+        - Game
+      summary: Alle Reviews
+      responses:
+        200:
+          description: Reviews
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    text:
+                      type: string
+                    rating:
+                      type: number
+                    user_id:
+                      type: string
+                    game_id:
+                      type: number
+                    time_played_id:
+                      type: number
+                    comments:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        text:
+                          type: string
+                    reactions:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          count:
+                            type: number
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  /list:
+    put:
+      tags:
+        - List
+      summary: Liste erzeugen
+      requestBody:
+        description: Listenbeschreibung
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        200:
+          description: Erzeugte Liste 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  name:
+                    type: string
+        401:
+          $ref: "#/components/responses/Unauthorized"
+          
+  /genre:
+    get:
+      tags:
+        - Game
+      summary: Alle Genre
+      responses:
+        200:
+          description: Alle Genre
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                    description:
+                      type: string
+  /publisher:
+    get:
+      tags:
+        - Game
+      summary: Alle Publisher
+      responses:
+        200:
+          description: Alle Publisher
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    website:
+                      type: string
+                    picture:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          path:
+                            type: string
+  /time_played:
+    get:
+      tags:
+        - Review
+      summary: Alle Zeitstaffeln
+      responses:
+        200:
+          description: Alle Zeitstaffeln
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    unit:
+                      type: string
+                    from:
+                      type: string
+                    until:
+                      type: string
+  /comment/{id}:
+    parameters:
+      - $ref: "#/components/parameters/id"
+    get:
+      tags:
+        - Review
+      summary: Kommentar
+      responses:
+        200:
+          description: Kommentar
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  text:
+                    type: string
+                  commented_on_type:
+                    type: string
+                  commented_on_id:
+                    type: number
+                  commented_by_ids:
+                    type: array
+                    items:
+                      type: number
+    delete:
+      tags:
+        - Review
+      summary: Kommentar löschen
+      responses:
+        200:
+          $ref: "#/components/responses/Ok"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+  /comment:
+    put:
+      tags:
+        - Review
+      summary: Kommentar erstellen
+      requestBody:
+        description: Kommentarbeschreibung
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                commented_on_type:
+                  type: string
+                commented_on_id:
+                  type: number
+      responses:
+        200:
+          $ref: "#/components/responses/Ok"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+  /review/{id}:
+    parameters:
+      - $ref: "#/components/parameters/id"
+    delete:
+      tags:
+        - Review
+      summary: Review löschen
+      responses:
+        200:
+          $ref: "#/components/responses/Ok"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+  /reaction/{id}:
+    parameters:
+      - $ref: "#/components/parameters/id"
+    put:
+      tags:
+        - Review
+      summary: Bewertung von Review mit id
+      requestBody:
+        description: Bewertungsbeschreibung
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+      responses:
+        200:
+          $ref: "#/components/responses/Ok"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+      
+
+components:
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int32
+    gameId:
+      name: gameId
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int32
+
+        
+  responses:
+    Ok:
+      description: Operation was successfull
+      content:
+        text/plain:
+          schema:
+            type: string
+    EntityAlreadyExist:
+      description: Entity already exist
+      content:
+        text/plain:
+          schema:
+            type: string
+    NotFound:
+      description: Entity not found.
+      content:
+        text/plain:
+          schema:
+            type: string
+    IllegalInput:
+      description: Illegal input for operation.
+    Unauthorized:
+      description: You are not authorized for this action
+      content:
+        text/plain:
+          schema:
+            type: string

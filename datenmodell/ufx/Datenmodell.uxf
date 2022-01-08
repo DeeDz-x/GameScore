@@ -1,0 +1,800 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>438</x>
+      <y>744</y>
+      <w>120</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>Zeitstaffel
+--
+id: int
+einheit: string
+von: time
+bis: time
+erstellungs_datum: timestamp
+aender_datum: timestamp</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>426</x>
+      <y>900</y>
+      <w>138</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>Review
+--
+id: int
+freitext: String
+rating: double
+erstellungs_datum: timestamp
+aender_datum: timestamp
+geloescht: bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>486</x>
+      <y>816</y>
+      <w>24</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=*
+m2=1</panel_attributes>
+    <additional_attributes>10.0;140.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>816</x>
+      <y>240</y>
+      <w>132</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>Spiele_Rating
+--
+id: int
+name: String
+min: double
+max: double
+schritt: double
+erstellungs_datum: timestamp
+aender_datum: timestamp</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>162</x>
+      <y>426</y>
+      <w>396</w>
+      <h>516</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=*
+m2=1</panel_attributes>
+    <additional_attributes>440.0;830.0;10.0;830.0;10.0;10.0;640.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>558</x>
+      <y>492</y>
+      <w>552</w>
+      <h>480</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=*
+m2=1</panel_attributes>
+    <additional_attributes>10.0;770.0;60.0;770.0;60.0;350.0;890.0;350.0;890.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>228</x>
+      <y>1050</y>
+      <w>126</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>Kommentar
+--
+id: int
+freitext: String
+erstellungs_datum: timestamp
+aender_datum: timestamp
+geloescht: bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>978</y>
+      <w>252</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=*
+m2=1</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;80.0;390.0;80.0;390.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>126</x>
+      <y>390</y>
+      <w>432</w>
+      <h>726</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=*
+m2=1</panel_attributes>
+    <additional_attributes>170.0;1180.0;10.0;1180.0;10.0;10.0;700.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>348</x>
+      <y>1080</y>
+      <w>66</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=0..1</panel_attributes>
+    <additional_attributes>10.0;60.0;90.0;60.0;90.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>816</y>
+      <w>126</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Bewertung
+--
+id: int
+erstellungs_datum: timestamp
+aender_datum: timestamp</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>252</x>
+      <y>858</y>
+      <w>198</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;
+m1=1
+m2=*</panel_attributes>
+    <additional_attributes>300.0;70.0;300.0;50.0;10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>150</x>
+      <y>414</y>
+      <w>408</w>
+      <h>426</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=*
+m2=1</panel_attributes>
+    <additional_attributes>150.0;680.0;10.0;680.0;10.0;10.0;660.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>258</x>
+      <y>702</y>
+      <w>126</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Bewertungsschema
+--
+id: int
+name: String
+erstellungs_datum: timestamp
+aender_datum: timestamp</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>756</y>
+      <w>24</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=*
+m2=1</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>258</x>
+      <y>570</y>
+      <w>120</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Bewertungsschema_Entries
+--
+id: int
+name: String
+value: double
+erstellungs_datum: timestamp
+aender_datum: timestamp</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>306</x>
+      <y>636</y>
+      <w>24</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=*</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1176</x>
+      <y>708</y>
+      <w>138</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>/Notification/
+--
+id: int
+text: String
+gelesen_am: timestamp
+erstellungs_datum: timestamp
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1086</x>
+      <y>822</y>
+      <w>114</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>CommentNotification</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1206</x>
+      <y>822</y>
+      <w>78</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>GameNotification</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1290</x>
+      <y>822</y>
+      <w>90</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>FollowNotification</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1236</x>
+      <y>774</y>
+      <w>108</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;160.0;50.0;160.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1236</x>
+      <y>774</y>
+      <w>18</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1146</x>
+      <y>774</y>
+      <w>108</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>160.0;10.0;160.0;50.0;10.0;50.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>348</x>
+      <y>834</y>
+      <w>840</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=0..*
+m2=1
+references</panel_attributes>
+    <additional_attributes>1320.0;10.0;1320.0;390.0;10.0;390.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1128</x>
+      <y>492</y>
+      <w>426</w>
+      <h>456</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=0..*
+m2=1
+references</panel_attributes>
+    <additional_attributes>190.0;580.0;190.0;740.0;630.0;740.0;630.0;180.0;10.0;180.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
+      <y>426</y>
+      <w>804</w>
+      <h>480</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=0..*
+m2=1
+references</panel_attributes>
+    <additional_attributes>1120.0;690.0;1120.0;780.0;1260.0;780.0;1260.0;420.0;10.0;420.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1038</x>
+      <y>408</y>
+      <w>120</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Game
+--
+name: String
+releasejahr: Date
+beschreibung: String
+website: String
+erstellungs_datum: timestamp
+aender_datum: timestamp
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1242</x>
+      <y>426</y>
+      <w>108</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Publisher
+--
+name: String
+beschreibung: String
+website: String
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>798</x>
+      <y>420</y>
+      <w>132</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Genre
+--
+id: int
+name: string
+beschreibung: string
+erstellungs_datum: timestamp</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>924</x>
+      <y>450</y>
+      <w>126</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=*
+m2=1</panel_attributes>
+    <additional_attributes>190.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1152</x>
+      <y>456</y>
+      <w>102</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=*
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1038</x>
+      <y>258</y>
+      <w>96</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>USK
+--
+id: int
+name: String
+einstufung: int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1074</x>
+      <y>306</y>
+      <w>24</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=*
+m2=1</panel_attributes>
+    <additional_attributes>10.0;170.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1128</x>
+      <y>228</y>
+      <w>84</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Vllt. als Domain 
+Code Enum</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1152</x>
+      <y>408</y>
+      <w>48</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=*
+</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0;60.0;60.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1278</x>
+      <y>252</y>
+      <w>138</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Bilder
+--
+id: int
+Pfad: String
+Prioritaet: int
+erstellungs_datum: timestamp
+aender_datum: timestamp
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1122</x>
+      <y>288</y>
+      <w>168</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=*</panel_attributes>
+    <additional_attributes>10.0;200.0;10.0;130.0;70.0;130.0;70.0;10.0;260.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1308</x>
+      <y>318</y>
+      <w>24</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;180.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>186</x>
+      <y>552</y>
+      <w>84</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Vllt. als Domain 
+Code Enum</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>522</x>
+      <y>720</y>
+      <w>84</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Vllt. als Domain 
+Code Enum
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>276</x>
+      <y>240</y>
+      <w>126</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>User
+--
+Username: String
+E-Mail: String
+Passwort: String
+Registrierungsdatum: date
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>546</x>
+      <y>348</y>
+      <w>126</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>Profil
+--
+Login Status: bool
+Alter: int
+Land: String
+Name: String
+Bio: String
+aender_datum: timestamp</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>384</x>
+      <y>294</y>
+      <w>174</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>270.0;130.0;10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>192</y>
+      <w>750</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;260.0;10.0;10.0;1230.0;10.0;1230.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>498</x>
+      <y>312</y>
+      <w>84</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Vllt. als Domain 
+Code Enum (Land)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1128</x>
+      <y>270</y>
+      <w>162</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;250.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>588</x>
+      <y>426</y>
+      <w>480</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+Lieblingsspiel</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0;780.0;170.0;780.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>408</x>
+      <y>474</y>
+      <w>126</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Spielaccount
+--
+id: int
+typ: enum
+profil: String
+aender_datum: timestamp
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>474</x>
+      <y>426</y>
+      <w>108</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=*</panel_attributes>
+    <additional_attributes>150.0;10.0;150.0;40.0;10.0;40.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>96</x>
+      <y>54</y>
+      <w>168</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>User_Suchergebnis
+--
+/*
+     Gibt den/die User mit seinem Profil zurück
+*/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>156</x>
+      <y>96</y>
+      <w>132</w>
+      <h>186</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>200.0;280.0;10.0;280.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>924</x>
+      <y>96</y>
+      <w>168</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Spiel_Suchergebnis
+--
+/*
+     Gibt gibt die Spiele/ das Spiel
+     mit all seinen Eigenschaften zurück
+*/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>990</x>
+      <y>150</y>
+      <w>60</w>
+      <h>294</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>80.0;460.0;10.0;460.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>624</x>
+      <y>30</y>
+      <w>96</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Liste
+--
+id: int
+oeffentlich: bool
+titel: String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>78</y>
+      <w>282</w>
+      <h>174</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=0..1</panel_attributes>
+    <additional_attributes>450.0;10.0;450.0;100.0;10.0;100.0;10.0;270.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>690</x>
+      <y>78</y>
+      <w>360</w>
+      <h>384</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=*</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;530.0;440.0;530.0;440.0;610.0;580.0;610.0</additional_attributes>
+  </element>
+</diagram>
