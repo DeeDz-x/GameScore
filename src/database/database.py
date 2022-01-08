@@ -1,4 +1,3 @@
-
 import pymssql
 from data.game import Game
 from data.genre import Genre
@@ -11,7 +10,7 @@ from data.game_account import Game_account
 from data.profile import Profile
 from data.list import List
 
-server = "192.168.2.197"
+server = "192.168.178.67"
 db_user = "sa"
 db_password = "Duefelsiek1!"
 database = "SWP"
@@ -38,7 +37,6 @@ WHERE """ +where_string
             usk_id, usk_name, usk_pic_id, usk_pic_path, usk_pic_creation_date, usk_pic_change_date,
             genre_id, gerne_name, genre_description, genre_creation_date,
         ) = game
-        print(release_year)
         cur.execute(query_select_pic,id)
         pics = []
         for pic in cur:
@@ -83,6 +81,20 @@ def get_game_by_id(id):
         comment_id,text,rating,time_played_id,creation_date,change_date = rev
         game.add_review(Review(comment_id,text,int(rating),time_played_id,creation_date,change_date,False))
     return game
+
+def search_games(title,genre,release_year,publisher):
+    where_clause = "ga.[name] LIKE %s"
+    value_list = ["%"+title+"%"]
+    if genre is not None:
+        where_clause+= "AND gr.[NAME] LIKE %s"
+        value_list.append("%"+genre+"%")
+    if release_year is not None:
+        where_clause+= "AND ga.RELEASJAHR LIKE %s"
+        value_list.append(release_year)
+    if publisher is not None:
+        where_clause+= "AND pb.[NAME] LIKE %s"
+        value_list.append("%"+publisher+"%")
+    return get_games(where_clause,tuple(value_list))
 
 def login(e_mail, password):
     query_select = "SELECT us.id AS ANZAHL FROM [USER] us WHERE us.E_MAIL = %s AND us.PASSWORT = %s"

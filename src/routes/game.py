@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, request, jsonify
 from datetime import datetime
 from data.comment import Comment
 
@@ -37,9 +37,16 @@ def new_games():
 
 @blueprint.route("/games", methods=["GET"])
 def games():
-    # TODO
-    game = database.get_game_by_id(id)
-    res = extract_game(game)
+    title = request.args.get("title")
+    if title is None:
+        return "",422
+    genre = request.args.get("genre")
+    release_year = request.args.get("releaseyear")
+    publisher = request.args.get("publisher")
+    games = database.search_games(title,genre,release_year,publisher)
+    res = []
+    for game in games:
+        res.append(extract_game(game))
     return jsonify(res), 200, {"Content-Type": "application/json"}
 
 
