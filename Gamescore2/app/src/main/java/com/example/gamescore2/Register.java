@@ -72,7 +72,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
 
 
         }
-        else if(username.getText().toString().equals("") || email.getText().toString().equals("") || password.getText().toString().equals("") || confirmPassword.getText().toString().equals("") || confirmEmail.getText().toString().equals("")){
+        else if(username.getText().toString().equals("") || email.getText().toString().equals("") || password.getText().toString().equals("") || confirmPassword.getText().toString().equals("") || confirmEmail.getText().toString().equals("") ||!email.getText().toString().contains("@")){
             FillFormDialog fillFormDialog = new FillFormDialog();
             fillFormDialog.show(getSupportFragmentManager(), "empty form");
 
