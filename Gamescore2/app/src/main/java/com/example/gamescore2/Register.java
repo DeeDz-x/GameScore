@@ -78,7 +78,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
 
         }
         else if(email.getText().toString().equals(confirmEmail.getText().toString())&& password.getText().toString().equals(confirmPassword.getText().toString())
-                && username.getText().toString() != null) {
+                && !username.getText().toString().equals(null)) {
             sendRegister(email.getText().toString(), password.getText().toString(), username.getText().toString());
 
             Intent intent = new Intent(this,SignIn.class);
