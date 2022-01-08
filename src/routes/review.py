@@ -2,9 +2,10 @@ from datetime import datetime
 from flask import Blueprint, request, jsonify
 from jwt.exceptions import InvalidTokenError
 from data.review import Review
-from util import auth
 from data.comment import Comment
 from data.time_played import Time_played
+from database import database
+from util import auth
 
 blueprint = Blueprint("review", __name__)
 
@@ -14,24 +15,28 @@ def create_review():
     if not request.is_json:
         return "", 400
     req = request.get_json()
-    if "id" in req and "text" in req and "rating" in req and "time played" in req:
-        review = Review(1, req["text"], req["rating"],
-                        req["time played"], datetime.now, datetime.now, False)
-        # if database.create_review(review):
-        #    return "", 200
-        # else:
-        #    return "", 409
-        return "", 200
+    if ("game_id" in req and "text" in req and "rating" in req and "time_played_id" in req):
+        if ("Authorization" in request.headers):
+            auth_header = request.headers["Authorization"]
+            try:
+                user_id = auth.decode(auth_header)
+            except InvalidTokenError as e:
+                print(e)
+                return "", 401
+        else:
+            return "", 401
+        if database.create_review(Review(1, req["text"], req["rating"],req["time_played_id"], datetime.now(), datetime.now(), False,req["game_id"],user_id)):
+            return "", 200
+        else:
+            return "", 409
     else:
         return "", 400
 
 
 @blueprint.route("/time_played", methods=["GET"])
 def time_played():
-    # database.get_all_time_played()
-    all_time_played = [Time_played(1, "h", 2, 5)]
     res = []
-    for time_played in all_time_played:
+    for time_played in database.get_all_time_played():
         res.append({"id": time_played.get_id(), "unit": time_played.get_unit(
         ), "from": time_played.get_start(), "until": time_played.get_end()})
     return jsonify(res), 200, {"Content-Type": "application/json"}
@@ -39,21 +44,14 @@ def time_played():
 
 @blueprint.route("/comment/<id>", methods=["GET"])
 def comment(id):
-    comment = Comment(1, "Text", datetime.now(), datetime.now(), False,
-                      Comment(2, "Text2", datetime.now(),
-                              datetime.now(), False),
-                      [
-        Comment(3, "Texte", datetime.now(), datetime.now(), False),
-        Comment(4, "Text4", datetime.now(), datetime.now(), False),
-    ])  # database.get_comment_by_id()
+    comment = database.get_comment_by_id(id)
+    if comment is None:
+        return "",404
     res = {"id": comment.get_id(),
            "text": comment.get_text(),
-           "commented_on_id": comment.get_commented_on().get_id()
+           "commented_on_id": comment.get_commented_on_id(),
+           "commented_on_type": comment.get_commend_on_type()
            }
-    if isinstance(comment.get_commented_on(), Comment):
-        res["commented_on_type"] = "Comment"
-    else:
-        res["commented_on_type"] = "Review"
     comments = comment.get_comments()
     if(len(comments) > 0):
         res_comments = []

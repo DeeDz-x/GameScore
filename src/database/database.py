@@ -5,11 +5,13 @@ from data.genre import Genre
 from data.picture import Picture
 from data.publisher import Publisher
 from data.review import Review
+from data.time_played import Time_played
 from data.user import User
 from data.usk import Usk
 from data.game_account import Game_account
 from data.profile import Profile
 from data.list import List
+from routes.review import comment
 from routes.user import user_id
 
 server = "192.168.178.67"
@@ -131,7 +133,7 @@ def get_all_publisher():
 
 def get_reviews_by_game_id(id):
     query_select_review = "SELECT rev.ID, rev.FREITEXT, CAST(rev.RATING AS INT), rev.ZEI_ID, rev.ERSTELLUNGS_DATUM, rev.AENDERUNGSDATUM, rev.GAM_ID, PROFIL.USE_ID FROM REVIEW rev JOIN PROFIL ON PROFIL.ID = rev.PRO_ID WHERE rev.GAM_ID = %s AND rev.GELOSCHT = 0"
-    query_select_comments = "SELECT KOMMENTAR.ID, KOMMENTAR.FREITEXT, KOMMENTAR.ERSTELLUNGS_DATUM, KOMMENTAR.AENDERUNGS_DATUM, KOMMENTAR.GELOSCHT,'review',KOMMENTAR.REV_ID,NULL,PROFIL.USE_ID FROM KOMMENTAR JOIN PROFIL ON PROFIL.ID = KOMMENTAR.PRO_ID WHERE KOMMENTAR.REV_ID = %s"
+    query_select_comments = "SELECT KOMMENTAR.ID, KOMMENTAR.FREITEXT, KOMMENTAR.ERSTELLUNGS_DATUM, KOMMENTAR.AENDERUNGS_DATUM, KOMMENTAR.GELOSCHT,'review',KOMMENTAR.REV_ID,NULL,PROFIL.USE_ID FROM KOMMENTAR JOIN PROFIL ON PROFIL.ID = KOMMENTAR.PRO_ID WHERE KOMMENTAR.REV_ID = %s AND KOMMENTAR.GELOSCHT = 0"
     con = pymssql.connect(
         server=server, user=db_user, password=db_password, database=database
     )
@@ -162,6 +164,63 @@ def get_average_rating(id):
     cur.close()
     con.close()
     return float(res)
+
+def get_all_time_played():
+    query = "SELECT ID, EINHEIT, VON, BIS FROM ZEITSTAFFEL"
+    con = pymssql.connect(
+        server=server, user=db_user, password=db_password, database=database
+    )
+    cur = con.cursor()
+    cur.execute(query)
+    res=[]
+    for time in cur:
+        res.append(Time_played(*time))
+    cur.close()
+    con.close()
+    return res
+
+def create_review(review):
+    query_select = "SELECT COUNT(*) FROM REVIEW JOIN PROFIL ON REVIEW.PRO_ID = PROFIL.ID WHERE GAM_ID = %s AND USE_ID = %s"
+    query_insert = "INSERT INTO REVIEW(ZEI_ID,GAM_ID,PRO_ID,FREITEXT,RATING,ERSTELLUNGS_DATUM,AENDERUNGSDATUM,GELOSCHT) SELECT %s,%s,ID,%s,%s,%s,%s,%s FROM PROFIL WHERE USE_ID = %s"
+    con = pymssql.connect(
+        server=server, user=db_user, password=db_password, database=database
+    )
+    cur = con.cursor()
+    cur.execute(query_select,(review.get_game_id(),review.get_user_id()))
+    res = cur.fetchone()
+    if res != (0,):
+        return False
+    cur.execute(query_insert,(review.get_time_played_id(),review.get_game_id(),review.get_text(),review.get_rating(),review.get_creation_date(),review.get_change_date(),review.get_deleted(),review.get_user_id()))
+    con.commit()
+    cur.close()
+    con.close()
+    return True
+
+def get_comment_by_id(id):
+    query_select_review = "SELECT KOMMENTAR.FREITEXT, KOMMENTAR.ERSTELLUNGS_DATUM, KOMMENTAR.AENDERUNGS_DATUM, KOMMENTAR.REV_ID,KOMMENTAR.KOM_ID,PROFIL.USE_ID FROM KOMMENTAR JOIN PROFIL ON PROFIL.ID = KOMMENTAR.PRO_ID WHERE KOMMENTAR.ID = %s AND KOMMENTAR.GELOSCHT = 0"
+    query_select_comments = "SELECT KOMMENTAR.ID, KOMMENTAR.FREITEXT, KOMMENTAR.ERSTELLUNGS_DATUM, KOMMENTAR.AENDERUNGS_DATUM, KOMMENTAR.GELOSCHT,'comment',KOMMENTAR.KOM_ID,NULL,PROFIL.USE_ID FROM KOMMENTAR JOIN PROFIL ON PROFIL.ID = KOMMENTAR.PRO_ID WHERE KOMMENTAR.KOM_ID = %s AND KOMMENTAR.GELOSCHT = 0"
+    con = pymssql.connect(
+        server=server, user=db_user, password=db_password, database=database
+    )
+    cur = con.cursor()
+    cur.execute(query_select_review, (id,))
+    comment = cur.fetchone()
+    if comment is None:
+        return None
+    text,creation_date,change_date,review_id,comment_id,user_id = comment
+    if(review_id is not None):
+        comment_type = "review"
+        commented_on_id = review_id
+    else:
+        comment_type = "comment"
+        commented_on_id = comment_id
+    res = Comment(id,text,creation_date,change_date,False,comment_type,commented_on_id,user_id=user_id)
+    cur.execute(query_select_comments, (res.get_id(),))
+    for com in cur:
+        res.add_comments(Comment(*com))
+    cur.close()
+    con.close()
+    return res
 
 def login(e_mail, password):
     query_select = "SELECT us.id AS ANZAHL FROM [USER] us WHERE us.E_MAIL = %s AND us.PASSWORT = %s"
