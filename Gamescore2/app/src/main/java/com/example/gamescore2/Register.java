@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.gamescore2.Dialogs.EmailMatchDialog;
+import com.example.gamescore2.Dialogs.FillFormDialog;
 import com.example.gamescore2.Dialogs.PasswordMatchDialog;
 
 import org.json.JSONObject;
@@ -70,6 +71,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
 
 
         }
+        else if(username.getText().toString().equals("") || email.getText().toString().equals("") || password.getText().toString().equals("") || confirmPassword.getText().toString().equals("") || confirmEmail.getText().toString().equals("")){
+            FillFormDialog fillFormDialog = new FillFormDialog();
+            fillFormDialog.show(getSupportFragmentManager(), "empty form");
+
+            Log.d("test","fill in form");
+
+        }
         else if (!password.getText().toString().equals(confirmPassword.getText().toString())){
 //            password.getText().clear();
             confirmPassword.getText().clear();
@@ -80,9 +88,14 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         else if(email.getText().toString().equals(confirmEmail.getText().toString())&& password.getText().toString().equals(confirmPassword.getText().toString())
                 && !username.getText().toString().equals(null)) {
             sendRegister(email.getText().toString(), password.getText().toString(), username.getText().toString());
-
             Intent intent = new Intent(this,SignIn.class);
             startActivity(intent);
+
+
+
+
+
+
 
     }
 }
