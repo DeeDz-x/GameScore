@@ -19,8 +19,8 @@
             app:layout_constraintEnd_toStartOf="@+id/searchButtonLandingpage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/gamescorelogo"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:srcCompat="@drawable/gamescoreprofil"
+            tools:srcCompat="@drawable/gamescoreprofil" />
 
         <ImageView
             android:id="@+id/LogoutButtonLandingpage"
@@ -30,8 +30,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/plusButtonLandingpage"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/gamescorelogo"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:srcCompat="@drawable/gamescorelogout"
+            tools:srcCompat="@drawable/gamescorelogout" />
 
         <ImageView
             android:id="@+id/searchButtonLandingpage"
@@ -40,8 +40,8 @@
             app:layout_constraintEnd_toStartOf="@+id/plusButtonLandingpage"
             app:layout_constraintStart_toEndOf="@+id/profileButtonLandingpage"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/gamescorelogo"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:srcCompat="@drawable/gamescoresearch"
+            tools:srcCompat="@drawable/gamescoresearch" />
 
         <ImageView
             android:id="@+id/plusButtonLandingpage"
@@ -50,7 +50,7 @@
             app:layout_constraintEnd_toStartOf="@+id/LogoutButtonLandingpage"
             app:layout_constraintStart_toEndOf="@+id/searchButtonLandingpage"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/gamescorelogo"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:srcCompat="@drawable/gamescoreadd"
+            tools:srcCompat="@drawable/gamescoreadd" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
