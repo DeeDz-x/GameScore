@@ -26,6 +26,7 @@ public interface ApiService {
     @POST("/login")
     Call<ResponseBody> sendLogin(@Body RequestBody loginRequest);
 
-
+    @POST("/register")
+    Call<ResponseBody> sendRegister(@Body RequestBody registerRequest);
 
 }

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
@@ -14,11 +13,9 @@ import android.widget.EditText;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import data.models.Login;
-import data.models.LoginRequest;
 import data.remotes.ApiUtils;
 import data.remotes.ApiService;
 import okhttp3.RequestBody;
@@ -46,6 +43,10 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
         Button signIn = findViewById(R.id.signInButton);
         signIn.setOnClickListener(this);
 
+        Button registerB = findViewById(R.id.changeToRegisterButton);
+        registerB.setOnClickListener(this);
+
+
         mApiService = ApiUtils.getApiService();
         email = findViewById(R.id.emailSignIn);
         password = findViewById(R.id.passwordSignIn);
@@ -55,6 +56,10 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+
+        switch (v.getId()){
+            case R.id.signInButton:
+
 
         email = findViewById(R.id.emailSignIn);
         password = findViewById(R.id.passwordSignIn);
@@ -72,7 +77,14 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
             }
 
         }
-    }
+        break;
+
+            case R.id.changeToRegisterButton:
+                Intent intent = new Intent(this, Register.class);
+                startActivity(intent);
+                break;
+
+    }}
 
     private void sendLogin(String mEmail, String mPassword) {
         Log.d("test", "klappt");
@@ -113,6 +125,4 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
 
         });
 
-
-    }
-}
+    }}
