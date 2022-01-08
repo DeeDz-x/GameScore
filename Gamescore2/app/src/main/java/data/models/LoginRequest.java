@@ -1,9 +1,5 @@
 package data.models;
-import android.media.session.MediaSession;
-import android.util.Log;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
 public class LoginRequest {
 

@@ -1,11 +1,9 @@
 package data.models;
-//import com.google.gson.annotations.Expose;
-//import com.google.gson.annotations.SerializedName;
+
 
 public class Login {
 
-//    @SerializedName("key")
-//    @Expose
+
     private String key;
 
     public String getKey() {
