@@ -1,15 +1,5 @@
 from flask import Blueprint, request, jsonify
-from datetime import datetime
-from data.comment import Comment
-
 from data.game import Game
-from data.game_account import Game_account
-from data.genre import Genre
-from data.profile import Profile
-from data.publisher import Publisher
-from data.review import Review
-from data.user import User
-from data.usk import Usk
 from database import database
 
 
@@ -66,56 +56,25 @@ def game(id):
 
 @blueprint.route("/game/<id>/reviews", methods=["GET"])
 def game_reviews(id):
-    game = Game(
-        1,
-        "Far cry 3",
-        2022,
-        "Ein Intressantes spiel",
-        "Karl Müller",
-        datetime.now(),
-        datetime.now(),
-        Publisher(1, "Test Name", "Test Beschreibung", "Test Webseite"),
-        Usk(1, "18", 1),
-        genre=[Genre(1, "Shooter", "Es geht um waffen gewalt", datetime.now())],
-        review=[
-            Review(
-                1,
-                "Test Text",
-                3,
-                1,
-                datetime.now(),
-                datetime.now(),
-                False,
-                [Comment(1, "Test Text 2", datetime.now, datetime.now, False)],
-            )
-        ],
-    )
-
-    profile = Profile(
-        True,
-        20,
-        "Deutschland",
-        "Karl Müller",
-        "Bio",
-        3,
-        [Game_account(1, "Steam", "KARLMÜLLERXX", "date")],
-        user=User(1, "Karl Müller", "Mail", "pass", datetime.now()),
-    )  # = database.get_review_by_id(id)
-
-    res = {
-        "id": game.get_review()[0].get_id(),
-        "text": game.get_review()[0].get_text(),
-        "rating": game.get_review()[0].get_rating(),
-        "user_id": profile.get_user().get_id(),
-        "game_id": game.get_id(),
-        "time_played_id": game.get_review()[0].get_time_played_id(),
-    }
-    comment = game.get_review()[0].get_comments()
-    if comment is not None:
-        res["comment"] = {
-            "id": game.get_review()[0].get_comments()[0].get_id(),
-            "text": game.get_review()[0].get_comments()[0].get_text(),
+    reviews = database.get_reviews_by_game_id(id)
+    res = []
+    for review in reviews:
+        rev =  {
+            "id": review.get_id(),
+            "text": review.get_text(),
+            "rating": review.get_rating(),
+            "user_id": review.get_user_id(),
+            "game_id": id,
+            "time_played_id": review.get_time_played_id(),
+            "comments": [],
         }
+        for com in review.get_comments():
+            rev["comments"].append({
+                "id":com.get_id(),
+                "text": com.get_text(),
+                "user_id":com.get_user_id(),
+            })
+        res.append(rev)
     return jsonify(res), 200, {"Content-Type": "application/json"}
 
     # "reactions": [
@@ -127,30 +86,30 @@ def game_reviews(id):
 
 @blueprint.route("/genre", methods=["GET"])
 def genre():
-    genre = Genre(
-        1, "shooter", "Es geht um waffen gewalt", datetime.now()
-    )  # = database.get_genre_by_id(id)
-    res = {
-        "id": genre.get_id(),
-        "name": genre.get_name(),
-        "descrition": genre.get_description(),
-    }
+    res = []
+    for genre in database.get_all_genres():
+        res.append({
+            "id": genre.get_id(),
+            "name": genre.get_name(),
+            "descrition": genre.get_description(),
+        })
     return jsonify(res), 200, {"Content-Type": "application/json"}
 
 
 @blueprint.route("/publisher", methods=["GET"])
 def publisher():
-    # = database.get_publisher_by_id(id)
-    publisher = Publisher(1, "Test Name", "Test Beschreibung", "Test Webseite")
-    res = {
-        "id": publisher.get_id(),
-        "name": publisher.get_name(),
-        "description": publisher.get_description(),
-        "website": publisher.get_website(),
-    }
-    pic = publisher.get_picture()
-    if pic is not None:
-        res["picture"] = {"id": pic.get_id(), "path": pic.get_path()}
+    res = []
+    for publisher in database.get_all_publisher():
+        pub = {
+            "id": publisher.get_id(),
+            "name": publisher.get_name(),
+            "description": publisher.get_description(),
+            "website": publisher.get_website(),
+        }
+        pic = publisher.get_picture()
+        if pic is not None:
+            pub["picture"] = {"id": pic.get_id(), "path": pic.get_path()}
+        res.append(pub)
     return jsonify(res), 200, {"Content-Type": "application/json"}
 
 
@@ -162,8 +121,8 @@ def extract_game(game: Game):
         "releaseyear": game.get_release(),
         "description": game.get_description(),
         "website": game.get_website(),
-        "creationdate": game.get_creation_date().strftime("%d/%m/%Y, %H:%M:%S")
-        # "average_rating": database.get_game_rating(id)?
+        "creationdate": game.get_creation_date().strftime("%d/%m/%Y, %H:%M:%S"),
+        "average_rating": database.get_average_rating(game.get_id())
     }
     pics = game.get_picture()
     if pics is not None:
