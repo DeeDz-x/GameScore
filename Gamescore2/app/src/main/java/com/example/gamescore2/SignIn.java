@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.gamescore2.Dialogs.LoginFailedDialog;
+
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -112,6 +114,9 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
                     Log.d("test", "klappt jetzt");
                 } else {
                     Log.d("test", "klappt nicht");
+                    LoginFailedDialog loginFailedDialog = new LoginFailedDialog();
+                    loginFailedDialog.show(getSupportFragmentManager(), "Login Failed Try again");
+
 
                 }
 
