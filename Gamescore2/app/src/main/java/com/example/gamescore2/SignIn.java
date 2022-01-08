@@ -105,7 +105,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()) {
                     try {
-                        token = response.body().string();
+                        token = "token " + response.body().string();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

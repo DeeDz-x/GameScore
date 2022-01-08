@@ -1,13 +1,24 @@
 package com.example.gamescore2;
 
+import static com.example.gamescore2.SignIn.token;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.ArrayMap;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.Map;
+
 import data.remotes.ApiService;
+import data.remotes.ApiUtils;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Landingpage extends AppCompatActivity implements View.OnClickListener {
 
@@ -28,6 +39,8 @@ public class Landingpage extends AppCompatActivity implements View.OnClickListen
         plus.setOnClickListener(this);
         notification.setOnClickListener(this);
 
+        mApiService = ApiUtils.getApiService();
+
 
     }
 
@@ -47,10 +60,36 @@ public class Landingpage extends AppCompatActivity implements View.OnClickListen
                 startActivity(k);
                 break;
             case R.id.LogoutButtonLandingpage:
-                Intent l = new Intent(this, Profil.class);
+
+                sendLogout(token);
+
+                Intent l = new Intent(this, SignIn.class);
                 startActivity(l);
             break;
         }
 
+    }
+
+    private void sendLogout(String token){
+
+        Call<Void> response = mApiService.sendLogout(token);
+        response.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful()) {
+
+                    Log.d("test", "klappt jetzt");
+                } else {
+                    Log.d("test", "klappt nicht");
+
+                }
+
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                System.out.println("Exception: " + t);
+                Log.e(TAG, "Unable to submit login to API.");
+            }
+        });
     }
 }
