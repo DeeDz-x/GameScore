@@ -10,9 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.gamescore2.Dialogs.EmailMatchDialog;
-import com.example.gamescore2.Dialogs.PasswordMatchDialog;
-
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -62,22 +59,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
 
        // Log.d("test", "username: " + username.getText().toString() + " email: "+ email.getText().toString() + " password: " + password.getText().toString());
 
-        if (!email.getText().toString().equals(confirmEmail.getText().toString())){
-           //email.getText().clear();
-           confirmEmail.getText().clear();
-            EmailMatchDialog emailMatchDialog = new EmailMatchDialog();
-            emailMatchDialog.show(getSupportFragmentManager(),"dialog email do not match");
-
-
-        }
-        else if (!password.getText().toString().equals(confirmPassword.getText().toString())){
-//            password.getText().clear();
-            confirmPassword.getText().clear();
-            PasswordMatchDialog passwordMatchDialog = new PasswordMatchDialog();
-            passwordMatchDialog.show(getSupportFragmentManager(),"dialog password do not match");
-
-        }
-        else if(email.getText().toString().equals(confirmEmail.getText().toString())&& password.getText().toString().equals(confirmPassword.getText().toString())
+        if (email.getText().toString() != null && password.getText().toString() != null
                 && username.getText().toString() != null) {
             sendRegister(email.getText().toString(), password.getText().toString(), username.getText().toString());
 

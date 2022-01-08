@@ -7,7 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import data.remotes.ApiService;
+
 public class Landingpage extends AppCompatActivity implements View.OnClickListener {
+
+    private static final String TAG = "";
+    private ApiService mApiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +21,7 @@ public class Landingpage extends AppCompatActivity implements View.OnClickListen
         ImageView profile = findViewById(R.id.profileButtonLandingpage);
         ImageView suche = findViewById(R.id.searchButtonLandingpage);
         ImageView plus = findViewById(R.id.plusButtonLandingpage);
-        ImageView notification = findViewById(R.id.notiButtonLandingpage);
+        ImageView notification = findViewById(R.id.LogoutButtonLandingpage);
 
         profile.setOnClickListener(this);
         suche.setOnClickListener(this);
@@ -41,10 +46,10 @@ public class Landingpage extends AppCompatActivity implements View.OnClickListen
                 Intent k = new Intent(this, WriteReview.class);
                 startActivity(k);
                 break;
-//            case R.id.notiButtonLandingpage:
-//                Intent l = new Intent(this, Profil.class);
-//                startActivity(l);
-//            break;
+            case R.id.LogoutButtonLandingpage:
+                Intent l = new Intent(this, Profil.class);
+                startActivity(l);
+            break;
         }
 
     }
