@@ -77,7 +77,7 @@ public class Landingpage extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()) {
-
+                    SignIn.token = null;
                     Log.d("test", "klappt jetzt");
                 } else {
                     Log.d("test", "klappt nicht");
