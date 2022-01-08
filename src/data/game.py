@@ -10,9 +10,9 @@ from data.usk import Usk
 
 class Game:
 
-    def __init__(self, id: int, name: str, release: datetime, description: str, website: str,
+    def __init__(self, id: int, name: str, release: str, description: str, website: str,
                  creation_date: datetime, change_date: datetime, publisher: Publisher = None,
-                 usk: Usk = None, picture: List[Picture] = None, genre: Genre = None, game: List = None, review: List[Review] = None):
+                 usk: Usk = None, picture: List[Picture] = None, genre: Genre = None, game: List = None, review: List[Review] = []):
         self.id = id
         self.name = name
         self.release = release
@@ -81,3 +81,6 @@ class Game:
     
     def get_review(self):
         return self.review
+    
+    def add_review(self,review:Review):
+        self.review.append(review)

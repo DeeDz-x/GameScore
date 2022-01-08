@@ -28,68 +28,24 @@ def popular_games():
 
 @blueprint.route("/new_games", methods=["GET"])
 def new_games():
-    game = Game(
-        1,
-        "Far cry 3",
-        datetime.now(),
-        "Ein Intressantes spiel",
-        "Karl Müller",
-        datetime.now(),
-        datetime.now(),
-        Publisher(1, "Test Name", "Test Beschreibung", "Test Webseite"),
-        Usk(1, "18", 1),
-        genre=[Genre(1, "Shooter", "Es geht um waffen gewalt", datetime.now())],
-    )  # = database.get_new_game_by_id(id)
-    res = extract_game(game)
+    games  = database.get_new_game()
+    res = []
+    for game in games:
+        res.append(extract_game(game))
     return jsonify(res), 200, {"Content-Type": "application/json"}
 
 
 @blueprint.route("/games", methods=["GET"])
 def games():
-    game = Game(
-        1,
-        "Far cry 3",
-        datetime.now(),
-        "Ein Intressantes spiel",
-        "Karl Müller",
-        datetime.now(),
-        datetime.now(),
-        Publisher(1, "Test Name", "Test Beschreibung", "Test Webseite"),
-        Usk(1, "18", 1),
-        genre=[Genre(1, "Shooter", "Es geht um waffen gewalt", datetime.now())],
-    )  # = database.get_game_by_id(id)
+    # TODO
+    game = database.get_game_by_id(id)
     res = extract_game(game)
     return jsonify(res), 200, {"Content-Type": "application/json"}
 
 
 @blueprint.route("/game/<id>", methods=["GET"])
 def game(id):
-    game = Game(
-        1,
-        "Far cry 3",
-        datetime.now(),
-        "Ein Intressantes spiel",
-        "Karl Müller",
-        datetime.now(),
-        datetime.now(),
-        Publisher(1, "Test Name", "Test Beschreibung", "Test Webseite"),
-        Usk(1, "18", 1),
-        genre=[Genre(1, "Shooter", "Es geht um waffen gewalt", datetime.now())],
-        review=[Review(1, "Test Text", 3, datetime.now(), datetime.now(), False)],
-    )  # = database.get_game_by_id(id)
-    game = Game(
-        2,
-        "test 2",
-        datetime.now(),
-        "Ein Intressantes spiel",
-        "Karl Müller",
-        datetime.now(),
-        datetime.now(),
-        Publisher(1, "Test Name", "Test Beschreibung", "Test Webseite"),
-        Usk(1, "18", 1),
-        genre=[Genre(1, "Shooter", "Es geht um waffen gewalt", datetime.now())],
-        review=[Review(1, "Test Text", 3, datetime.now(), datetime.now(), False)],
-    )
+    game = database.get_game_by_id(id)
     res = extract_game(game)
     revs = game.get_review()
     if revs is not None:
@@ -106,7 +62,7 @@ def game_reviews(id):
     game = Game(
         1,
         "Far cry 3",
-        datetime.now(),
+        2022,
         "Ein Intressantes spiel",
         "Karl Müller",
         datetime.now(),
@@ -194,12 +150,12 @@ def publisher():
 def extract_game(game: Game):
     """Extracts base data from game."""
     res = {
+        "id": game.get_id(),
         "name": game.get_name(),
-        "releaseyear": game.get_release().strftime("%d/%m/%Y"),
+        "releaseyear": game.get_release(),
         "description": game.get_description(),
         "website": game.get_website(),
-        "creationdate": game.get_creation_date().strftime("%d/%m/%Y, %H:%M:%S"),
-        "changedate": game.get_change_date().strftime("%d/%m/%Y, %H:%M:%S")
+        "creationdate": game.get_creation_date().strftime("%d/%m/%Y, %H:%M:%S")
         # "average_rating": database.get_game_rating(id)?
     }
     pics = game.get_picture()
@@ -227,7 +183,7 @@ def extract_game(game: Game):
             "name": usk.get_name(),
             "classification": usk.get_classification(),
         }
-        pic_usk = pub.get_picture()
+        pic_usk = usk.get_picture()
         if pic_usk is not None:
             res["usk"]["pictrue"] = {"id": pic_usk.get_id(), "path": pic_usk.get_path()}
     gen = game.get_genre()

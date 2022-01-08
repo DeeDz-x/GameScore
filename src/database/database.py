@@ -4,6 +4,7 @@ from data.game import Game
 from data.genre import Genre
 from data.picture import Picture
 from data.publisher import Publisher
+from data.review import Review
 from data.user import User
 from data.usk import Usk
 from data.game_account import Game_account
@@ -16,75 +17,39 @@ db_password = "Duefelsiek1!"
 database = "SWP"
 
 
-def get_popular_games():
-    query_select_game = """SELECT ga.ID, ga.[NAME], ga.RELEASJAHR, ga.BESCHREIBUNG, ga.WEBSITE, ga.ERSTELLUNGSDATUM, pb.ID, pb.[NAME], pb.BESCHREIBUNG, pb.WEBSITE, usk.ID, usk.[NAME], usk_pic.ID, usk_pic.PFAD, usk_pic.ERSTELLUNGS_DATUM, usk_pic.AENDERUNGS_DATUM, gr.ID, gr.[NAME], gr.BESCHREIBUNG, gr.ERSTELLUNGSDATUM
-                    FROM GAME ga
-LEFT JOIN PUBLISHER pb ON ga.PUB_ID = pb.ID LEFT JOIN GENRE gr on ga.GEN_ID = gr.ID LEFT JOIN USK usk on ga.USK_ID = usk.ID LEFT JOIN BILD usk_pic ON usk.ID = usk_pic.USK_ID 
-WHERE ga.ID IN (SELECT gl.ID FROM LISTE li 
-        LEFT JOIN GAME_LIST gl ON li.ID = gl.LIS_ID
-        LEFT JOIN USER us ON li.USE_ID = us.ID
-        WHERE li.TITEL = 'POPULAR_GAMES' AND us.E_MAIL = 'admin@gamescore.de')"""
-    query_select_pic = """SELECT ID, PFAD, PRIORITAET, ERSTELLUNGS_DATUM, AENDERUNGS_DATUM FORM BILD WHERE GAM_ID = %s OREDR BY PRIORITAET ASC"""
+
+def get_games(where_string, tuple):
+    query_select_game = """SELECT ga.ID, ga.[NAME], ga.RELEASJAHR, ga.BESCHREIBUNG, ga.WEBSITE, ga.ERSTELLUNGSDATUM, pb.ID, pb.[NAME], pb.BESCHREIBUNG, pb.WEBSITE, pub_pic.ID, pub_pic.PFAD, pub_pic.ERSTELLUNGS_DATUM, pub_pic.AENDERUNGS_DATUM, usk.ID, usk.[NAME], usk_pic.ID, usk_pic.PFAD, usk_pic.ERSTELLUNGS_DATUM, usk_pic.AENDERUNGS_DATUM, gr.ID, gr.[NAME], gr.BESCHREIBUNG, gr.ERSTELLUNGSDATUM
+FROM GAME ga
+LEFT JOIN PUBLISHER pb ON ga.PUB_ID = pb.ID LEFT JOIN GENRE gr ON ga.GEN_ID = gr.ID LEFT JOIN USK usk ON ga.USK_ID = usk.ID LEFT JOIN BILD usk_pic ON usk.ID = usk_pic.USK_ID LEFT JOIN BILD pub_pic ON pb.ID = pub_pic.PUB_ID
+WHERE """ +where_string
+    query_select_pic = """SELECT ID, PFAD, PRIORITAET, ERSTELLUNGS_DATUM, AENDERUNGS_DATUM FROM BILD WHERE GAM_ID = %s ORDER BY PRIORITAET ASC"""
     con = pymssql.connect(
         server=server, user=db_user, password=db_password, database=database
     )
     cur = con.cursor()
-    cur.execute(query_select_game)
+    cur.execute(query_select_game,tuple)
+    games = cur.fetchall()
     res = []
-    for game in cur:
+    for game in games:
         (
-            id,
-            name,
-            release_year,
-            description,
-            website,
-            creation_date,
-            publisher_id,
-            publisher_name,
-            publisher_description,
-            publisher_website,
-            usk_id,
-            usk_name,
-            usk_pic_id,
-            usk_pic_path,
-            usk_pic_creation_date,
-            usk_pic_change_date,
-            genre_id,
-            gerne_name,
-            genre_description,
-            genre_creation_date,
+            id, name, release_year, description, website, creation_date,
+            publisher_id, publisher_name, publisher_description, publisher_website, publisher_pic_id, publisher_pic_path, publisher_pic_creation_date, publisher_pic_change_date,
+            usk_id, usk_name, usk_pic_id, usk_pic_path, usk_pic_creation_date, usk_pic_change_date,
+            genre_id, gerne_name, genre_description, genre_creation_date,
         ) = game
-        cur_pic = con.cursor()
-        cur_pic.execute(query_select_pic,id)
+        print(release_year)
+        cur.execute(query_select_pic,id)
         pics = []
-        for pic in cur_pic:
+        for pic in cur:
             pics.append(Picture(*pic))
         res.append(
-            Game(
-                id,
-                name,
-                release_year,
-                description,
-                website,
-                creation_date,
-                None,
-                Publisher(
-                    publisher_id,
-                    publisher_name,
-                    publisher_description,
-                    publisher_website,
+            Game(id, name, release_year, description, website, creation_date, None,
+                Publisher(publisher_id, publisher_name, publisher_description, publisher_website,
+                    Picture(publisher_pic_id, publisher_pic_path, 1, publisher_pic_creation_date, publisher_pic_change_date)
                 ),
-                Usk(
-                    usk_id,
-                    usk_name,
-                    None,
-                    Picture(
-                        usk_pic_id,
-                        usk_pic_path,
-                        1,
-                        usk_pic_creation_date,
-                        usk_pic_change_date,
-                    ),
+                Usk(usk_id, usk_name, None,
+                    Picture( usk_pic_id, usk_pic_path, 1, usk_pic_creation_date, usk_pic_change_date),
                 ),
                 pics,
                 Genre(genre_id, gerne_name, genre_description, genre_creation_date),
@@ -94,6 +59,30 @@ WHERE ga.ID IN (SELECT gl.ID FROM LISTE li
     con.close()
     return res
 
+def get_games_from_special_list(title):
+    return get_games(""" ga.ID IN (SELECT gl.ID FROM LISTE li 
+LEFT JOIN GAME_LIST gl ON li.ID = gl.LIS_ID
+LEFT JOIN [USER] us ON li.USE_ID = us.ID
+WHERE li.TITEL = %s AND us.E_MAIL = 'admin@gamescore.de')""",(title,))
+
+def get_popular_games():
+    return get_games_from_special_list("POPULAR_GAMES")
+
+def get_new_game():
+    return get_games_from_special_list("NEW_GAME")
+
+def get_game_by_id(id):
+    query_select = """SELECT ID, FREITEXT, RATING, ZEI_ID, ERSTELLUNGS_DATUM, AENDERUNGSDATUM FROM REVIEW WHERE GAM_ID = %s AND GELOSCHT = 0"""
+    game = get_games("ga.ID = %s",(id,))[0]
+    con = pymssql.connect(
+        server=server, user=db_user, password=db_password, database=database
+    )
+    cur = con.cursor()
+    cur.execute(query_select,(id,))
+    for rev in cur:
+        comment_id,text,rating,time_played_id,creation_date,change_date = rev
+        game.add_review(Review(comment_id,text,int(rating),time_played_id,creation_date,change_date,False))
+    return game
 
 def login(e_mail, password):
     query_select = "SELECT us.id AS ANZAHL FROM [USER] us WHERE us.E_MAIL = %s AND us.PASSWORT = %s"
