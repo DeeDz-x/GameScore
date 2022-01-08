@@ -1,20 +1,23 @@
 package data.models;
 import android.media.session.MediaSession;
-//import com.google.gson.annotations.Expose;
-//import com.google.gson.annotations.SerializedName;
+import android.util.Log;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class LoginRequest {
 
-//    @SerializedName("e_mail")
-//    @Expose
-//    private String email;
-//    @SerializedName("password")
-//    @Expose
-    private String password;
 
-    public LoginRequest(String email, String password){
-//        this.email = email;
+
+    private String password;
+    private String e_mail;
+
+    public LoginRequest(String password, String e_mail){
+
+
         this.password = password;
+        this.e_mail = e_mail;
+
     }
 
 }

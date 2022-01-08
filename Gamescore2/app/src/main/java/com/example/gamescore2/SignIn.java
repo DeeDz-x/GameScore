@@ -5,19 +5,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.List;
+import org.json.JSONObject;
 
-import data.models.LogRequest;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
 import data.models.Login;
 import data.models.LoginRequest;
-import data.models.LoginResponse;
 import data.remotes.ApiUtils;
 import data.remotes.ApiService;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,6 +34,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
     static Login apiKey;
     private String key;
     EditText email, password;
+    static String token;
 
 
 
@@ -59,7 +65,8 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
         if (email.getText().toString() != null && password.getText().toString() != null) {
             sendLogin(email.getText().toString(), password.getText().toString());
 
-            if (key != null) {
+
+            if (token != null) {
                 Intent intent = new Intent(this, Landingpage.class);
                 startActivity(intent);
             }
@@ -70,42 +77,42 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
     private void sendLogin(String mEmail, String mPassword) {
         Log.d("test", "klappt");
 
-//        mApiService.sendLogin(new LoginRequest(mEmail, mPassword)).enqueue(new Callback<Login>() {
-//            @Override
-//            public void onResponse(Call<Login> call, Response<Login> response) {
-//                if(response.isSuccessful()) {
-//                    Log.d("test", "klappt");
-//                } else {
-//                    Log.d("test", "klappt nicht");
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Login> call, Throwable t) {
-//                System.out.println("Exception: " + t);
-//                Log.e(TAG, "Unable to submit login to API.");
-//            }
-//
-//        });
-        mApiService.postJson("{'password': 'jason', 'e_mail': 'hallo@jason.de' }").enqueue(new Callback<String>() {
+        Map<String, Object> jsonParams = new ArrayMap<>();
+//put something inside the map, could be null
+        jsonParams.put("password", mPassword);
+        jsonParams.put("e_mail", mEmail);
+
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(jsonParams)).toString());
+
+        Call<ResponseBody> response = mApiService.sendLogin(body);
+
+        response.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()) {
-                    Log.d("test", "klappt");
+                    try {
+                        token = response.body().string();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Log.d("test","Der token ist:" + token);
+
+                    Log.d("test", "klappt jetzt");
                 } else {
                     Log.d("test", "klappt nicht");
+
                 }
 
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 System.out.println("Exception: " + t);
                 Log.e(TAG, "Unable to submit login to API.");
             }
 
         });
+
 
     }
 }
