@@ -104,7 +104,7 @@ public class Landingpage extends AppCompatActivity implements View.OnClickListen
                         e.printStackTrace();
                     }
 
-                    EditText popGameText = findViewById(R.id.firstGamenNameLandingpage);
+                    TextView popGameText = findViewById(R.id.firstGamenNameLandingpage);
                     popGameText.setText(popGame);
 
 

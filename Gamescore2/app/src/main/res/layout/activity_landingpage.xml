@@ -53,7 +53,7 @@
             app:srcCompat="@drawable/gamescoreadd"
             tools:srcCompat="@drawable/gamescoreadd" />
 
-        <EditText
+        <TextView
             android:id="@+id/hotLandingpage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,17 +65,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.454"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchButtonLandingpage" />
+            app:layout_constraintTop_toBottomOf="@+id/searchButtonLandingpage"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <ImageView
             android:id="@+id/firstGameImageLandingpage"
             android:layout_width="196dp"
             android:layout_height="163dp"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="18dp"
             app:layout_constraintEnd_toStartOf="@+id/firstGamenNameLandingpage"
-            app:layout_constraintHorizontal_bias="0.421"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/hotLandingpage"
             app:srcCompat="@drawable/battlefield"
@@ -93,31 +94,35 @@
             app:srcCompat="@drawable/metin2"
             tools:srcCompat="@drawable/metin2" />
 
-        <EditText
+        <TextView
             android:id="@+id/firstGamenNameLandingpage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="190dp"
+            android:layout_height="44dp"
             android:layout_marginTop="40dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Battlefield 2042"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.701"
+            app:layout_constraintHorizontal_bias="0.837"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/hotLandingpage" />
+            app:layout_constraintTop_toBottomOf="@+id/hotLandingpage"
+            tools:ignore="TouchTargetSizeCheck" />
 
-        <EditText
+        <TextView
             android:id="@+id/secondGameNameLandingpage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="44dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Metin 2"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.706"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/firstGameRatingBarLandingpage" />
+            app:layout_constraintTop_toBottomOf="@+id/firstGameRatingBarLandingpage"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <RatingBar
             android:id="@+id/firstGameRatingBarLandingpage"
@@ -129,7 +134,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.83"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/firstGamenNameLandingpage" />
+            app:layout_constraintTop_toBottomOf="@+id/firstGamenNameLandingpage"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <RatingBar
             android:id="@+id/SecondGameRatingBarLandingpage"
@@ -141,6 +147,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.83"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/secondGameNameLandingpage" />
+            app:layout_constraintTop_toBottomOf="@+id/secondGameNameLandingpage"
+            tools:ignore="SpeakableTextPresentCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
