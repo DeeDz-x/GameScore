@@ -89,7 +89,7 @@ public class GameProfil extends AppCompatActivity implements View.OnClickListene
                     gameReleaseView.setText(release);
                     TextView gamePublisherView = findViewById(R.id.publisherGameProfile);
                     gamePublisherView.setText(publisher);
-                    EditText gameDescriptionView = findViewById(R.id.gameDescriptionGameProfile);
+                    TextView gameDescriptionView = findViewById(R.id.gameDescriptionGameProfile);
                     gameDescriptionView.setText(description);
 
 
