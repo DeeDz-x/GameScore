@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.ArrayMap;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,18 +12,13 @@ import android.widget.EditText;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.Map;
 
 import data.remotes.ApiService;
 import data.remotes.ApiUtils;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class Profil extends AppCompatActivity implements View.OnClickListener{
+public class Profile extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "";
     private ApiService mApiService;
@@ -33,7 +27,7 @@ public class Profil extends AppCompatActivity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profil);
+        setContentView(R.layout.activity_profile);
         Button save = findViewById(R.id.saveButtonProfil);
         save.setOnClickListener(this);
 
@@ -94,25 +88,5 @@ public class Profil extends AppCompatActivity implements View.OnClickListener{
 
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(jsonParams)).toString());
 
-//        Call<ResponseBody> response = mApiService.sendProfile(body);
 
-//        response.enqueue(new Callback<ResponseBody>() {
-//            @Override
-//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                if(response.isSuccessful()) {
-//
-//                    Log.d("test", "klappt jetzt");
-//                } else {
-//                    Log.d("test", "klappt nicht");
-//
-//                }
-//
-//            }
-//        @Override
-//        public void onFailure(Call<ResponseBody> call, Throwable t) {
-//            System.out.println("Exception: " + t);
-//            Log.e(TAG, "Unable to submit login to API.");
-//        }
-//
-//    });
 }}

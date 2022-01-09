@@ -6,19 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
-import java.util.Map;
-
 import data.remotes.ApiService;
 import data.remotes.ApiUtils;
 import okhttp3.ResponseBody;
@@ -137,9 +131,9 @@ public class Landingpage extends AppCompatActivity implements View.OnClickListen
                 if(response.isSuccessful()) {
                     SignIn.token = null;
                     Log.d("test", SignIn.token);
-                    Log.d("test", "klappt jetzt");
+                    Log.d("test", "logout success");
                 } else {
-                    Log.d("test", "klappt nicht");
+                    Log.d("test", "logout failed");
 
                 }
 

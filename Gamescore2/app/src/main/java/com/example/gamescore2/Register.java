@@ -17,7 +17,6 @@ import com.example.gamescore2.Dialogs.PasswordMatchDialog;
 
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.Map;
 
 import data.remotes.ApiService;
@@ -54,15 +53,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
-        Log.d("test", "testjsdfddfjdjfsdfefsd");
+        Log.d("test", "clicked");
 
         username = findViewById(R.id.usernameRegister);
         email = findViewById(R.id.emailRegister);
         confirmEmail = findViewById(R.id.confirmEmail);
         password = findViewById(R.id.passwordRegister);
         confirmPassword = findViewById(R.id.confirmPassword);
-
-       // Log.d("test", "username: " + username.getText().toString() + " email: "+ email.getText().toString() + " password: " + password.getText().toString());
 
         if (!email.getText().toString().equals(confirmEmail.getText().toString())){
             //email.getText().clear();
@@ -80,7 +77,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
 
         }
         else if (!password.getText().toString().equals(confirmPassword.getText().toString())){
-//            password.getText().clear();
             confirmPassword.getText().clear();
             password.getText().clear();
             PasswordMatchDialog passwordMatchDialog = new PasswordMatchDialog();
@@ -92,8 +88,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             LengthDialog lengthDialog = new LengthDialog();
             lengthDialog.show(getSupportFragmentManager(), "dialog length to short");
         }
-        else if(email.getText().toString().equals(confirmEmail.getText().toString())&& password.getText().toString().equals(confirmPassword.getText().toString())
-                ) {
+        else if(email.getText().toString().equals(confirmEmail.getText().toString())&& password.getText().toString().equals(confirmPassword.getText().toString())) {
             sendRegister(email.getText().toString(), password.getText().toString(), username.getText().toString());
             Intent intent = new Intent(this,SignIn.class);
             startActivity(intent);
@@ -105,7 +100,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     private void sendRegister(String mEmail, String mPassword, String mUsername) {
 
         Map<String, Object> jsonParams = new ArrayMap<>();
-//put something inside the map, could be null
         jsonParams.put("password", mPassword);
         jsonParams.put("e_mail", mEmail);
         jsonParams.put("username", mUsername);

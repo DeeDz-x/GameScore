@@ -94,7 +94,6 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
         Log.d("test", "klappt");
 
         Map<String, Object> jsonParams = new ArrayMap<>();
-//put something inside the map, could be null
         jsonParams.put("password", mPassword);
         jsonParams.put("e_mail", mEmail);
 
@@ -113,9 +112,9 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
                     }
                     Log.d("test","Der token ist:" + token);
 
-                    Log.d("test", "klappt jetzt");
+                    Log.d("test", "logged in");
                 } else {
-                    Log.d("test", "klappt nicht");
+                    Log.d("test", "log in failed");
                     LoginFailedDialog loginFailedDialog = new LoginFailedDialog();
                     loginFailedDialog.show(getSupportFragmentManager(), "Login Failed Try again");
 

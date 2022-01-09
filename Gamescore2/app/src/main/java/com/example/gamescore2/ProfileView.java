@@ -27,7 +27,7 @@ public class ProfileView extends AppCompatActivity implements View.OnClickListen
 
         switch (v.getId()){
             case R.id.changeProfileView:
-                Intent i = new Intent(this, Profil.class);
+                Intent i = new Intent(this, Profile.class);
                 startActivity(i);
                 break;
             case R.id.listsProfileView:

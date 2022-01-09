@@ -14,10 +14,8 @@ public class Search extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        //Button rating = findViewById(R.id.ratingButtonSearch);
         Button search = findViewById(R.id.startButtonSearch);
 
-        //rating.setOnClickListener(this);
         search.setOnClickListener(this);
     }
 
