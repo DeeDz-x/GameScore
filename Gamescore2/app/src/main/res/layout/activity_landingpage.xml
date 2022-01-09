@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:fillViewport="true"
     tools:ignore="SpeakableTextPresentCheck">
 
@@ -60,7 +60,7 @@
             android:layout_marginTop="16dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="HOT"
+            android:text=" HOT 🔥"
             android:textSize="34sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.454"
@@ -69,25 +69,29 @@
 
         <ImageView
             android:id="@+id/firstGameImageLandingpage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="196dp"
+            android:layout_height="163dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="18dp"
             app:layout_constraintEnd_toStartOf="@+id/firstGamenNameLandingpage"
+            app:layout_constraintHorizontal_bias="0.421"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/hotLandingpage"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:srcCompat="@drawable/battlefield"
+            tools:srcCompat="@drawable/battlefield" />
 
         <ImageView
             android:id="@+id/secondGameImageLandingpage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="131dp"
+            android:layout_height="165dp"
+            android:layout_marginStart="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/firstGameImageLandingpage"
-            app:layout_constraintVertical_bias="1.0"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:layout_constraintVertical_bias="0.042"
+            app:srcCompat="@drawable/metin2"
+            tools:srcCompat="@drawable/metin2" />
 
         <EditText
             android:id="@+id/firstGamenNameLandingpage"
@@ -106,12 +110,12 @@
             android:id="@+id/secondGameNameLandingpage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="36dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Metin 2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.696"
+            app:layout_constraintHorizontal_bias="0.706"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/firstGameRatingBarLandingpage" />
 
@@ -119,11 +123,11 @@
             android:id="@+id/firstGameRatingBarLandingpage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="24dp"
             android:progressTint="#FF9800"
             android:rating="5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.824"
+            app:layout_constraintHorizontal_bias="0.83"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/firstGamenNameLandingpage" />
 
@@ -131,11 +135,11 @@
             android:id="@+id/SecondGameRatingBarLandingpage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:progressTint="#FFC107"
             android:rating="5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.824"
+            app:layout_constraintHorizontal_bias="0.83"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/secondGameNameLandingpage" />
     </androidx.constraintlayout.widget.ConstraintLayout>
