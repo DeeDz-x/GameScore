@@ -1,6 +1,6 @@
 import pymssql
 
-server = "192.168.178.67"
+server = "192.168.2.197"
 db_user = "sa"
 db_password = "Duefelsiek1!"
 database = "SWP"

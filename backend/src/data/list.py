@@ -1,14 +1,20 @@
 from data.game import Game
 from typing import List
 
+from routes.user import user_id
+
 
 class List:
 
-    def __init__(self, id: int, public: bool, title: str, game: List[Game] = None):
+    def __init__(self, id: int, public: bool, title: str, user_id: int, game: List[Game] = None):
         self.id = id
         self.public = public
         self.title = title
-        self.game = game
+        self.user_id = user_id
+        if game is None:
+            self.game = []
+        else:
+            self.game = game
 
     def __str__(self):
         return f"""List
@@ -30,8 +36,11 @@ class List:
     def get_game(self):
         return self.game
 
+    def get_user_id(self):
+        return self.user_id
+
     def clear_game(self):
-        self.game_accounts = []
+        self.game = []
 
     def add_game(self, game: Game):
         self.game.append(game)
