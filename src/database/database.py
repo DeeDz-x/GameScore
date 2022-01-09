@@ -1,3 +1,4 @@
+from datetime import datetime
 import pymssql
 from data.comment import Comment
 from data.game import Game
@@ -12,7 +13,7 @@ from data.game_account import Game_account
 from data.profile import Profile
 from data.list import List
 
-server = "192.168.178.67"
+server = "192.168.2.197"
 db_user = "sa"
 db_password = "Duefelsiek1!"
 database = "SWP"
@@ -383,3 +384,55 @@ def create_list(list: List, user_id):
     cur.close()
     con.close()
     return True
+
+def get_list_by_id(id):
+    query_list = """select LISTE.ID,LISTE.OEFFENTLICH,LISTE.TITEL,LISTE.USE_ID from LISTE where LISTE.ID like %s"""
+    query_game = "select GAME.ID,GAME.NAME,GAME.RELEASJAHR,GAME.BESCHREIBUNG,GAME.WEBSITE from GAME_LIST left join GAME on GAME_LIST.ID = GAME.ID where GAME_LIST.LIS_ID like %s"
+    con = pymssql.connect(server=server, user=db_user,
+                          password=db_password, database=database)
+    cur = con.cursor()
+    cur.execute(query_list, (id,))
+    list = cur.fetchone()
+    if list is None:
+        return None
+    lis = List(*list)
+    cur.execute(query_game, (lis.get_id(),))
+    for gam in cur:
+        lis.add_game(Game(*gam,datetime.now(),datetime.now()))
+    con.commit()
+    cur.close()
+    con.close()
+    return lis
+
+def delete_list(id):
+    query_delete_game = "delete from GAME_LIST where GAME_LIST.LIS_ID = %s"
+    query_delete_list = "delete from LISTE where LISTE.ID = %s"
+    con = pymssql.connect(server=server, user=db_user,
+                          password=db_password, database=database)
+    cur = con.cursor()
+    cur.execute(query_delete_game, (id,))
+    cur.execute(query_delete_list, (id,))
+    con.commit()
+    cur.close()
+    con.close()
+
+def add_game_to_list(id, gameid):
+    query = """SET IDENTITY_INSERT GAME_LIST ON
+               insert into GAME_LIST(LIS_ID,ID) values (%s,%s)"""
+    con = pymssql.connect(server=server, user=db_user,
+                          password=db_password, database=database)
+    cur = con.cursor()
+    cur.execute(query, (id,gameid))
+    con.commit()
+    cur.close()
+    con.close()
+
+def delete_game_in_list(id,gameid):
+    query_delete_game = "delete from GAME_LIST where GAME_LIST.LIS_ID = %s AND GAME_LIST.ID = %s"
+    con = pymssql.connect(server=server, user=db_user,
+                          password=db_password, database=database)
+    cur = con.cursor()
+    cur.execute(query_delete_game, (id,gameid))
+    con.commit()
+    cur.close()
+    con.close()
