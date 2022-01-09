@@ -51,7 +51,7 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/releaseDateGameprofil"
+            android:id="@+id/releaseDateGameProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -71,22 +71,22 @@
             android:text="Genre"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.815"
-            app:layout_constraintStart_toEndOf="@+id/releaseDateGameprofil"
+            app:layout_constraintStart_toEndOf="@+id/releaseDateGameProfile"
             app:layout_constraintTop_toBottomOf="@+id/gameGameprofil" />
 
         <TextView
-            android:id="@+id/publisherGameprofil"
+            android:id="@+id/publisherGameProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="140dp"
-            android:text="Publisheer"
+            android:text="Publisher"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/gameGameprofil" />
 
         <EditText
-            android:id="@+id/editTextTextMultiLine"
+            android:id="@+id/gameDescriptionGameProfile"
             android:layout_width="340dp"
             android:layout_height="44dp"
             android:layout_marginTop="10dp"
@@ -96,7 +96,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/publisherGameprofil"
+            app:layout_constraintTop_toBottomOf="@+id/publisherGameProfile"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <RatingBar
@@ -107,7 +107,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.204"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine"
+            app:layout_constraintTop_toBottomOf="@+id/gameDescriptionGameProfile"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
@@ -119,7 +119,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.141"
             app:layout_constraintStart_toEndOf="@+id/ratingBarGameprofil"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+            app:layout_constraintTop_toBottomOf="@+id/gameDescriptionGameProfile" />
 
         <TextView
             android:id="@+id/friendsWhoPlayGameprofil"
@@ -142,6 +142,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/friendsWhoPlayGameprofil" />
+
+        <TextView
+            android:id="@+id/gameNameGameProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="284dp"
+            android:text="GameName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
