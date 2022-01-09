@@ -1,3 +1,4 @@
+import uuid
 import pymssql
 from data.comment import Comment
 from data.game import Game
@@ -265,6 +266,35 @@ def delete_review(id,user_id):
     con.close()
     return True
 
+def update_user(user:Profile):
+    query_update_profile = "UPDATE PROFIL SET [ALTER] = %s,LAND = %s,[NAME] = %s,BIO = %s WHERE USE_ID = %s"
+    query_update_user = "UPDATE [USER] SET E_MAIL = %s WHERE ID = %s"
+    query_delete_game_accounts = "DELETE FROM SPIELEACCOUNT WHERE PRO_ID = (SELECT ID FROM PROFIL WHERE USE_ID = %s)"
+    query_insert_game_accounts = "INSERT INTO SPIELEACCOUNT (PRO_ID,TYP,PROFIL) SELECT ID, %s,%s FROM PROFIL WHERE USE_ID = %s"
+    query_select_picture = "SELECT BILD.ID FROM BILD JOIN PROFIL ON PROFIL.ID = BILD.PRO_ID WHERE PROFIL.USE_ID = %s"
+    query_update_picture = "UPDATE BILD SET PFAD = %s WHERE ID = %s"
+    query_insert_picture = "INSERT INTO BILD (PRO_ID,PFAD,PRIORITAET,ERSTELLUNGS_DATUM,AENDERUNGS_DATUM) SELECT ID,%s,1,%s,%s FROM PROFIL WHERE USE_ID = %s"
+    con = pymssql.connect(
+        server=server, user=db_user, password=db_password, database=database
+    )
+    cur = con.cursor()
+    cur.execute(query_update_profile, (user.get_age(),user.get_country(),user.get_name(),user.get_bio(),user.get_user().get_id()))
+    cur.execute(query_update_user, (user.get_user().get_e_mail(),user.get_user().get_id()))
+    cur.execute(query_delete_game_accounts, (user.get_user().get_id(),))
+    for account in user.get_game_accounts():
+        cur.execute(query_insert_game_accounts, (account.get_type(),account.get_profile(),user.get_user().get_id()))
+    if user.get_picture() is not None:
+        cur.execute(query_select_picture, (user.get_user().get_id(),))
+        id = cur.fetchone()
+        if (id is not None):
+            id, = id
+            cur.execute(query_update_picture, (user.get_picture().get_path(), id))
+        else:
+            cur.execute(query_insert_picture, (user.get_picture().get_path(), user.get_picture().get_creation_date(),user.get_picture().get_change_date(),user.get_user().get_id()))
+    con.commit()
+    cur.close()
+    con.close()
+
 def login(e_mail, password):
     query_select = "SELECT us.id AS ANZAHL FROM [USER] us WHERE us.E_MAIL = %s AND us.PASSWORT = %s"
     query_update = "UPDATE PROFIL SET LOGIN_STATUS = 1 WHERE USE_ID = %s"
@@ -337,7 +367,7 @@ def get_user_by_id(id):
 def get_user(id):
     query = """SELECT pr.LOGIN_STATUS, pr.[ALTER], pr.LAND, pr.[NAME], pr.BIO, NULL AS FAVORITE_GAME,
              sp.ID, sp.TYP, sp.AENDERDATUM,
-             us.ID, us.USERNAME, us.E_MAIL, us.REGISTRIEUNGSDATUM
+             us.ID, us.USERNAME, us.E_MAIL, us.REGISTRIEUNGSDATUM, sp.PROFIL
              FROM [USER] us LEFT JOIN PROFIL pr on us.ID = pr.USE_ID LEFT JOIN SPIELEACCOUNT sp on pr.ID = sp.PRO_ID WHERE us.ID = %s"""
     con = pymssql.connect(server=server, user=db_user,
                           password=db_password, database=database)
@@ -347,15 +377,11 @@ def get_user(id):
     profile = Profile(row[0], row[1], row[2], row[3], row[4], row[5], user=User(
         row[9], row[10], row[11], "", row[12]))
     while row is not None:
-        profile.add_game_account(Game_account(row[6], row[7], "", row[8]))
+        profile.add_game_account(Game_account(row[6], row[7], row[13], row[8]))
         row = cur.fetchone()
     cur.close()
     con.close()
     return profile
-
-
-def update_user(profile):
-    query = ""
 
 
 def search_users(username):

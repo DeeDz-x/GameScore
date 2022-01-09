@@ -6,7 +6,6 @@ import uuid
 from data.picture import Picture
 from data.profile import Profile
 from data.game_account import Game_account
-from data.user import User
 from database import database
 from util import auth
 from jwt.exceptions import InvalidTokenError
@@ -28,7 +27,7 @@ def user():
             user_id = auth.decode(auth_header)
         except InvalidTokenError as e:
             print(e)
-            return "", 200
+            return "", 401
         res = extract_profile(database.get_user(user_id))
         res["username"] = database.get_user(user_id).get_user().get_username()
         res["e_mail"] = database.get_user(user_id).get_user().get_username()
@@ -46,40 +45,43 @@ def user_put():
             user_id = auth.decode(auth_header)
         except InvalidTokenError as e:
             print(e)
-            return "", 200
-        res = extract_profile(database.get_user(user_id))
-        res["username"] = database.get_user(user_id).get_user().get_username()
-        res["e_mail"] = database.get_user(user_id).get_user().get_username()
-
+            return "", 401
+    user = database.get_user(user_id)
+    change = False
     if "age" in req and isinstance(req["age"], int):
-        database.get_user(user_id).set_age(req["age"])
+        user.set_age(req["age"])
+        change = True
     if "country" in req:
-        database.get_user(user_id).set_country(req["country"])
+        user.set_country(req["country"])
+        change = True
     if "name" in req:
-        database.get_user(user_id).set_name(req["name"])
+        user.set_name(req["name"])
+        change = True
     if "bio" in req:
-        database.get_user(user_id).set_bio(req["bio"])
-    if "favorite_game_id" in req and isinstance(req["favorite_game_id"], int):
-        database.get_user(user_id).set_favorite_game_id(req["favorite_game_id"])
+        user.set_bio(req["bio"])
+        change = True
     if "e_mail" in req:
-        database.get_user(user_id).get_user().set_e_mail(req["e_mail"])
+        user.get_user().set_e_mail(req["e_mail"])
+        change = True
     if "accounts" in req:
-        database.get_user(user_id).clear_game_accounts()
+        user.clear_game_accounts()
         for acc in req["accounts"]:
-            database.get_user(user_id).add_game_account(Game_account(
-                acc["id"], acc["type"], acc["profile"], acc["change_date"]))
+            user.add_game_account(Game_account(0, acc["type"], acc["profile"],datetime.now()))
+        change = True
     if "picture" in req:
         pic_data = req["picture"]
         print(pic_data)
-        if(database.get_user(user_id).get_picture() is not None):
-            path = database.get_user(user_id).get_picture().get_path()
+        if(user.get_picture() is not None):
+            path = user.get_picture().get_path()
             save_to_file(pic_data, path)
-            database.get_user(user_id).get_picture().set_change_date(datetime.now())
+            user.get_picture().set_change_date(datetime.now())
         else:
-            path = "pic/" + str(uuid.uuid4()) + ".png"
-            print(save_to_file(pic_data, path))
-            database.get_user(user_id).set_picture(Picture(0,path,0,datetime.now(),datetime.now()))
-    # database.update_user(database.get_user(user_id))
+            path = str(uuid.uuid4()) + ".png"
+            print(save_to_file(pic_data, "pic/" + path))
+            user.set_picture(Picture(0,path,0,datetime.now(),datetime.now()))
+        change = True
+    if change:
+        database.update_user(user)
     return "", 200
 
 

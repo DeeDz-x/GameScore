@@ -18,7 +18,7 @@ try:
     querry_2 = file.read()
     file.close()
 except OSError:
-    print("Die Datei {filename_1} konnte nicht geöffnet werden.")
+    print("Die Datei {filename_2} konnte nicht geöffnet werden.")
 
 
 connection = pymssql.connect(
