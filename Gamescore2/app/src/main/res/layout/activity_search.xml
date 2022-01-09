@@ -95,15 +95,17 @@
         android:text="Search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingButtonSearch" />
+        tools:layout_editor_absoluteY="546dp" />
 
-    <Button
-        android:id="@+id/ratingButtonSearch"
+    <CheckBox
+        android:id="@+id/ratingCheckBoxSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="rating"
+        android:layout_marginTop="488dp"
+        android:text="Rating"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/publisherSearch" />
+        app:layout_constraintTop_toTopOf="@+id/headerSearch" />
 </androidx.constraintlayout.widget.ConstraintLayout>

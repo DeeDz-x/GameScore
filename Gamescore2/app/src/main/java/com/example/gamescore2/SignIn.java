@@ -46,6 +46,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
         Button signIn = findViewById(R.id.signInButton);
         signIn.setOnClickListener(this);
 
+
         Button registerB = findViewById(R.id.changeToRegisterButton);
         registerB.setOnClickListener(this);
 
