@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    tools:ignore="SpeakableTextPresentCheck">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Landingpage">
+
+        <ImageView
+            android:id="@+id/profileButtonLandingpage"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            app:layout_constraintEnd_toStartOf="@+id/searchButtonLandingpage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/gamescorelogo"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/notiButtonLandingpage"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            android:layout_marginEnd="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/plusButtonLandingpage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/gamescorelogo"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/searchButtonLandingpage"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            app:layout_constraintEnd_toStartOf="@+id/plusButtonLandingpage"
+            app:layout_constraintStart_toEndOf="@+id/profileButtonLandingpage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/gamescorelogo"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/plusButtonLandingpage"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            app:layout_constraintEnd_toStartOf="@+id/notiButtonLandingpage"
+            app:layout_constraintStart_toEndOf="@+id/searchButtonLandingpage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/gamescorelogo"
+            tools:srcCompat="@tools:sample/avatars" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

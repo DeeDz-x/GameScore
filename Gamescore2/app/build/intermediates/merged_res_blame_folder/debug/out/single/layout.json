@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "C:\\Users\\DeeDz\\GameScore\\Gamescore2\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_register.xml",
+        "source": "C:\\Users\\DeeDz\\GameScore\\Gamescore2\\app\\src\\main\\res\\layout\\activity_register.xml"
+    },
+    {
+        "merged": "C:\\Users\\DeeDz\\GameScore\\Gamescore2\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_main.xml",
+        "source": "C:\\Users\\DeeDz\\GameScore\\Gamescore2\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\DeeDz\\GameScore\\Gamescore2\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_search.xml",
+        "source": "C:\\Users\\DeeDz\\GameScore\\Gamescore2\\app\\src\\main\\res\\layout\\activity_search.xml"
+    },
+    {
+        "merged": "C:\\Users\\DeeDz\\GameScore\\Gamescore2\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_profile_view.xml",
+        "source": "C:\\Users\\DeeDz\\GameScore\\Gamescore2\\app\\src\\main\\res\\layout\\activity_profile_view.xml"
+    },
+    {
+        "merged": "C:\\Users\\DeeDz\\GameScore\\Gamescore2\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_lists.xml",
+        "source": "C:\\Users\\DeeDz\\GameScore\\Gamescore2\\app\\src\\main\\res\\layout\\activity_lists.xml"
+    },
+    {
+        "merged": "C:\\Users\\DeeDz\\GameScore\\Gamescore2\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_game_profil.xml",
+        "source": "C:\\Users\\DeeDz\\GameScore\\Gamescore2\\app\\src\\main\\res\\layout\\activity_game_profil.xml"
+    },
+    {
+        "merged": "C:\\Users\\DeeDz\\GameScore\\Gamescore2\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_profil.xml",
+        "source": "C:\\Users\\DeeDz\\GameScore\\Gamescore2\\app\\src\\main\\res\\layout\\activity_profil.xml"
+    },
+    {
+        "merged": "C:\\Users\\DeeDz\\GameScore\\Gamescore2\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_reviews.xml",
+        "source": "C:\\Users\\DeeDz\\GameScore\\Gamescore2\\app\\src\\main\\res\\layout\\activity_reviews.xml"
+    },
+    {
+        "merged": "C:\\Users\\DeeDz\\GameScore\\Gamescore2\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_write_review.xml",
+        "source": "C:\\Users\\DeeDz\\GameScore\\Gamescore2\\app\\src\\main\\res\\layout\\activity_write_review.xml"
+    },
+    {
+        "merged": "C:\\Users\\DeeDz\\GameScore\\Gamescore2\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_landingpage.xml",
+        "source": "C:\\Users\\DeeDz\\GameScore\\Gamescore2\\app\\src\\main\\res\\layout\\activity_landingpage.xml"
+    }
+]

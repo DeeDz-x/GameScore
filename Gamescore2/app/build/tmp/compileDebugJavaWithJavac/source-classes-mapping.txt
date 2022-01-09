@@ -1,0 +1,53 @@
+com/example/gamescore2/ProfileView.java
+ com.example.gamescore2.ProfileView
+com/example/gamescore2/Register.java
+ com.example.gamescore2.Register
+com/example/gamescore2/databinding/ActivityWriteReviewBinding.java
+ com.example.gamescore2.databinding.ActivityWriteReviewBinding
+com/example/gamescore2/Reviews.java
+ com.example.gamescore2.Reviews
+com/example/gamescore2/databinding/ActivityLandingpageBinding.java
+ com.example.gamescore2.databinding.ActivityLandingpageBinding
+com/example/gamescore2/databinding/ActivityRegisterBinding.java
+ com.example.gamescore2.databinding.ActivityRegisterBinding
+com/example/gamescore2/WriteReview.java
+ com.example.gamescore2.WriteReview
+com/example/gamescore2/databinding/ActivityProfileViewBinding.java
+ com.example.gamescore2.databinding.ActivityProfileViewBinding
+com/example/gamescore2/databinding/ActivityMainBinding.java
+ com.example.gamescore2.databinding.ActivityMainBinding
+com/example/gamescore2/Profil.java
+ com.example.gamescore2.Profil
+data/remotes/RetrofitClient.java
+ data.remotes.RetrofitClient
+data/models/LoginRequest.java
+ data.models.LoginRequest
+com/example/gamescore2/databinding/ActivitySearchBinding.java
+ com.example.gamescore2.databinding.ActivitySearchBinding
+com/example/gamescore2/databinding/ActivityReviewsBinding.java
+ com.example.gamescore2.databinding.ActivityReviewsBinding
+data/remotes/ApiUtils.java
+ data.remotes.ApiUtils
+com/example/gamescore2/databinding/ActivityProfilBinding.java
+ com.example.gamescore2.databinding.ActivityProfilBinding
+com/example/gamescore2/GameProfil.java
+ com.example.gamescore2.GameProfil
+com/example/gamescore2/databinding/ActivityListsBinding.java
+ com.example.gamescore2.databinding.ActivityListsBinding
+data/models/Login.java
+ data.models.Login
+com/example/gamescore2/BuildConfig.java
+ com.example.gamescore2.BuildConfig
+com/example/gamescore2/databinding/ActivityGameProfilBinding.java
+ com.example.gamescore2.databinding.ActivityGameProfilBinding
+com/example/gamescore2/Search.java
+ com.example.gamescore2.Search
+com/example/gamescore2/SignIn.java
+ com.example.gamescore2.SignIn
+ com.example.gamescore2.SignIn$1
+data/remotes/ApiService.java
+ data.remotes.ApiService
+com/example/gamescore2/Lists.java
+ com.example.gamescore2.Lists
+com/example/gamescore2/Landingpage.java
+ com.example.gamescore2.Landingpage
