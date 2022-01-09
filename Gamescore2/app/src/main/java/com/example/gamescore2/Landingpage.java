@@ -9,8 +9,14 @@ import android.os.Bundle;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.Map;
 
 import data.remotes.ApiService;
@@ -24,6 +30,7 @@ public class Landingpage extends AppCompatActivity implements View.OnClickListen
 
     private static final String TAG = "";
     private ApiService mApiService;
+    private String popGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +41,14 @@ public class Landingpage extends AppCompatActivity implements View.OnClickListen
         ImageView plus = findViewById(R.id.plusButtonLandingpage);
         ImageView notification = findViewById(R.id.LogoutButtonLandingpage);
 
+
         profile.setOnClickListener(this);
         suche.setOnClickListener(this);
         plus.setOnClickListener(this);
         notification.setOnClickListener(this);
 
         mApiService = ApiUtils.getApiService();
+        getPopGames();
 
 
     }
@@ -68,6 +77,55 @@ public class Landingpage extends AppCompatActivity implements View.OnClickListen
             break;
         }
 
+    }
+
+    private void getPopGames() {
+
+        Call<ResponseBody> response = mApiService.getPopGames();
+        response.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Log.d("test", "Games klappt jetzt");
+                    JSONObject json = new JSONObject();
+                    try {
+                        json = new JSONObject(response.body().string());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    try {
+                        popGame = json.getString("name");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    EditText popGameText = findViewById(R.id.firstGamenNameLandingpage);
+                    popGameText.setText(popGame);
+
+
+                    try {
+                        Log.d("test", response.body().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    Log.d("test", popGame);
+                } else {
+                    Log.d("test", "Games klappt nicht");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                System.out.println("Exception: " + t);
+                Log.e(TAG, "Unable to submit login to API.");
+            }
+        });
     }
 
     private void sendLogout(String token){
