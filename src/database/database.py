@@ -11,8 +11,6 @@ from data.usk import Usk
 from data.game_account import Game_account
 from data.profile import Profile
 from data.list import List
-from routes.review import comment
-from routes.user import user_id
 
 server = "192.168.178.67"
 db_user = "sa"
@@ -180,7 +178,7 @@ def get_all_time_played():
     return res
 
 def create_review(review):
-    query_select = "SELECT COUNT(*) FROM REVIEW JOIN PROFIL ON REVIEW.PRO_ID = PROFIL.ID WHERE GAM_ID = %s AND USE_ID = %s"
+    query_select = "SELECT COUNT(*) FROM REVIEW JOIN PROFIL ON REVIEW.PRO_ID = PROFIL.ID WHERE GAM_ID = %s AND USE_ID = %s AND GELOSCHT = 0"
     query_insert = "INSERT INTO REVIEW(ZEI_ID,GAM_ID,PRO_ID,FREITEXT,RATING,ERSTELLUNGS_DATUM,AENDERUNGSDATUM,GELOSCHT) SELECT %s,%s,ID,%s,%s,%s,%s,%s FROM PROFIL WHERE USE_ID = %s"
     con = pymssql.connect(
         server=server, user=db_user, password=db_password, database=database
@@ -197,13 +195,13 @@ def create_review(review):
     return True
 
 def get_comment_by_id(id):
-    query_select_review = "SELECT KOMMENTAR.FREITEXT, KOMMENTAR.ERSTELLUNGS_DATUM, KOMMENTAR.AENDERUNGS_DATUM, KOMMENTAR.REV_ID,KOMMENTAR.KOM_ID,PROFIL.USE_ID FROM KOMMENTAR JOIN PROFIL ON PROFIL.ID = KOMMENTAR.PRO_ID WHERE KOMMENTAR.ID = %s AND KOMMENTAR.GELOSCHT = 0"
+    query_select_comment = "SELECT KOMMENTAR.FREITEXT, KOMMENTAR.ERSTELLUNGS_DATUM, KOMMENTAR.AENDERUNGS_DATUM, KOMMENTAR.REV_ID,KOMMENTAR.KOM_ID,PROFIL.USE_ID FROM KOMMENTAR JOIN PROFIL ON PROFIL.ID = KOMMENTAR.PRO_ID WHERE KOMMENTAR.ID = %s AND KOMMENTAR.GELOSCHT = 0"
     query_select_comments = "SELECT KOMMENTAR.ID, KOMMENTAR.FREITEXT, KOMMENTAR.ERSTELLUNGS_DATUM, KOMMENTAR.AENDERUNGS_DATUM, KOMMENTAR.GELOSCHT,'comment',KOMMENTAR.KOM_ID,NULL,PROFIL.USE_ID FROM KOMMENTAR JOIN PROFIL ON PROFIL.ID = KOMMENTAR.PRO_ID WHERE KOMMENTAR.KOM_ID = %s AND KOMMENTAR.GELOSCHT = 0"
     con = pymssql.connect(
         server=server, user=db_user, password=db_password, database=database
     )
     cur = con.cursor()
-    cur.execute(query_select_review, (id,))
+    cur.execute(query_select_comment, (id,))
     comment = cur.fetchone()
     if comment is None:
         return None
@@ -221,6 +219,51 @@ def get_comment_by_id(id):
     cur.close()
     con.close()
     return res
+
+def delete_comment(id):
+    query_update="UPDATE KOMMENTAR SET GELOSCHT = 1 WHERE ID = %s"
+    con = pymssql.connect(
+        server=server, user=db_user, password=db_password, database=database
+    )
+    cur = con.cursor()
+    cur.execute(query_update, (id,))
+    con.commit()
+    cur.close()
+    con.close()
+
+def create_comment(comment):
+    query_insert = "INSERT INTO KOMMENTAR(REV_ID,KOM_ID,PRO_ID,FREITEXT,ERSTELLUNGS_DATUM,AENDERUNGS_DATUM,GELOSCHT) SELECT %s,%s,ID,%s,%s,%s,%s FROM PROFIL WHERE USE_ID = %s"
+    con = pymssql.connect(
+        server=server, user=db_user, password=db_password, database=database
+    )
+    cur = con.cursor()
+    if (comment.get_commend_on_type() == "review"):
+        review_id = comment.get_commented_on_id()
+        comment_id = None
+    else:
+        comment_id = comment.get_commented_on_id()
+        review_id = None
+    cur.execute(query_insert,(review_id,comment_id,comment.get_text(),comment.get_creation_date(),comment.get_change_date(),comment.get_deleted(),comment.get_user_id()))
+    con.commit()
+    cur.close()
+    con.close()
+
+def delete_review(id,user_id):
+    query_select = "SELECT COUNT(*) FROM REVIEW JOIN PROFIL ON REVIEW.PRO_ID = PROFIL.ID WHERE REVIEW.ID = %s AND PROFIL.USE_ID = %s"
+    query_update = "UPDATE REVIEW SET GELOSCHT = 1 WHERE ID = %s"
+    con = pymssql.connect(
+        server=server, user=db_user, password=db_password, database=database
+    )
+    cur = con.cursor()
+    cur.execute(query_select, (id, user_id))
+    res = cur.fetchone()
+    if res != (1,):
+        return False
+    cur.execute(query_update, (id,))
+    con.commit()
+    cur.close()
+    con.close()
+    return True
 
 def login(e_mail, password):
     query_select = "SELECT us.id AS ANZAHL FROM [USER] us WHERE us.E_MAIL = %s AND us.PASSWORT = %s"

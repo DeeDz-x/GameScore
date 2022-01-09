@@ -5,14 +5,17 @@ from data.picture import Picture
 
 
 class Profile:
-    def __init__(self, login_status: bool, age: int, country: str, name: str, bio: str, favorite_game_id: int, game_accounts: List[Game_account] = [], picture: Picture = None, user: User = None):
+    def __init__(self, login_status: bool, age: int, country: str, name: str, bio: str, favorite_game_id: int, game_accounts: List[Game_account] = None, picture: Picture = None, user: User = None):
         self.login_status = login_status
         self.age = age
         self.country = country
         self.name = name
         self.bio = bio
         self.favorite_game_id = favorite_game_id
-        self.game_accounts = game_accounts
+        if game_accounts is None:
+            self.game_accounts = []
+        else:
+            self.game_accounts = game_accounts
         self.picture = picture
         self.user = user
 

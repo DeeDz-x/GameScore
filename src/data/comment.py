@@ -4,14 +4,17 @@ from typing import List
 
 class Comment:
 
-    def __init__(self, id: int, text: str, creation_date: datetime, change_date: datetime, deleted: bool, commented_on_type: str, commented_on_id=None, comments=[], user_id=None):
+    def __init__(self, id: int, text: str, creation_date: datetime, change_date: datetime, deleted: bool, commented_on_type: str, commented_on_id=None, comments=None, user_id=None):
         self.id = id
         self.text = text
         self.creation_date = creation_date
         self.change_date = change_date
         self.deleted = deleted
         self.commented_on_id = commented_on_id
-        self.comments = comments
+        if comments is None:
+            self.comments = []
+        else:
+            self.comments = comments
         self.user_id = user_id
         self.commented_on_type = commented_on_type
 

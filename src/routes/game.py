@@ -77,12 +77,6 @@ def game_reviews(id):
         res.append(rev)
     return jsonify(res), 200, {"Content-Type": "application/json"}
 
-    # "reactions": [
-    #  {
-    #    "id": 0,
-    #    "count": 0
-    #  }
-
 
 @blueprint.route("/genre", methods=["GET"])
 def genre():

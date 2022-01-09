@@ -5,7 +5,7 @@ from data.comment import Comment
 
 
 class Review:
-    def __init__(self, id: int, text: str, rating: int, time_played_id: int, creation_date: datetime, change_date: datetime, deleted: bool,game_id: int,user_id: int, comments: List[Comment] = []):
+    def __init__(self, id: int, text: str, rating: int, time_played_id: int, creation_date: datetime, change_date: datetime, deleted: bool,game_id: int,user_id: int, comments: List[Comment] = None):
         self.id = id
         self.text = text
         self.rating = rating
@@ -15,7 +15,10 @@ class Review:
         self.deleted = deleted
         self.game_id = game_id
         self.user_id = user_id
-        self.comments = comments
+        if comments is None:
+            self.comments = []
+        else:
+            self.comments = comments
 
     def __str__(self):
         return f"""Review

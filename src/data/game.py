@@ -12,7 +12,7 @@ class Game:
 
     def __init__(self, id: int, name: str, release: str, description: str, website: str,
                  creation_date: datetime, change_date: datetime, publisher: Publisher = None,
-                 usk: Usk = None, picture: List[Picture] = None, genre: Genre = None, game: List = None, review: List[Review] = []):
+                 usk: Usk = None, picture: List[Picture] = None, genre: Genre = None, game: List = None, review: List[Review] = None):
         self.id = id
         self.name = name
         self.release = release
@@ -25,7 +25,10 @@ class Game:
         self.picture = picture
         self.genre = genre
         self.game = game
-        self.review = review
+        if review is None:
+            self.review = []
+        else:
+            self.review = review
 
     def __str__(self):
         return f"""Game

@@ -3,7 +3,6 @@ from flask import Blueprint, request, jsonify
 from jwt.exceptions import InvalidTokenError
 from data.review import Review
 from data.comment import Comment
-from data.time_played import Time_played
 from database import database
 from util import auth
 
@@ -63,7 +62,7 @@ def comment(id):
 
 @blueprint.route("/comment/<id>", methods=["DELETE"])
 def delete_comment(id):
-    c_user_id = 1  # database.get_comment_by_id().get_user_id()
+    c_user_id = database.get_comment_by_id(id).get_user_id()
     if ("Authorization" in request.headers):
         auth_header = request.headers["Authorization"]
         try:
@@ -75,7 +74,7 @@ def delete_comment(id):
             return "", 401
     else:
         return "", 401
-    # database.delete_comment(id)
+    database.delete_comment(id)
     return "", 200
 
 
@@ -94,16 +93,29 @@ def create_comment():
     else:
         return "", 401
     if "text" in req and "commented_on_type" in req and "commented_on_id" in req:
-        comment = Comment(1, req["text"], datetime.now,
-                          datetime.now, False, req["commented_on_type"], req["commented_on_id"], user_id = user_id)
-        # if database.create_comment(comment):
-        #    return "", 200
-        # else:
-        #    return "", 409
+        comment = Comment(1, req["text"], datetime.now(),
+                          datetime.now(), False, req["commented_on_type"], req["commented_on_id"], user_id = user_id)
+        database.create_comment(comment)
         return "", 200
     else:
         return "", 400
 
+
+@blueprint.route("/review/<id>", methods=["DELETE"])
+def delete_review(id):
+    if ("Authorization" in request.headers):
+        auth_header = request.headers["Authorization"]
+        try:
+            user_id = auth.decode(auth_header)
+        except InvalidTokenError as e:
+            print(e)
+            return "", 401
+    else:
+        return "", 401
+    if (database.delete_review(id,user_id)):
+        return "",200
+    else:
+        return "",401
 
 @blueprint.route("/reaction/<id>", methods=["PUT"])
 def reaction(id):
