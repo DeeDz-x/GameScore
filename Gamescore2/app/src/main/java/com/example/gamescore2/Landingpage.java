@@ -130,7 +130,6 @@ public class Landingpage extends AppCompatActivity implements View.OnClickListen
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()) {
                     SignIn.token = null;
-                    Log.d("test", SignIn.token);
                     Log.d("test", "logout success");
                 } else {
                     Log.d("test", "logout failed");
