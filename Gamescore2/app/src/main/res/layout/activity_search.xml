@@ -92,14 +92,14 @@
         android:id="@+id/startButtonSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="137dp"
+        android:layout_marginTop="548dp"
         android:backgroundTint="#FFC107"
         android:text="Search"
         android:textColor="#800032"
         app:iconTint="#800032"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
         android:id="@+id/ratingCheckBoxSearch"
