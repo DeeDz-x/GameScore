@@ -56,7 +56,7 @@ public class GameProfil extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    Log.d("test", "Games klappt jetzt");
+                    Log.d("test", "Games-API works");
                     JSONObject json = new JSONObject();
                     try {
                         json = new JSONObject(response.body().string());
@@ -97,14 +97,15 @@ public class GameProfil extends AppCompatActivity implements View.OnClickListene
                         e.printStackTrace();
                     }
                 } else {
-                    Log.d("test", "Games klappt nicht");
+                    Log.d("test", "Games-API doesnt work");
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 System.out.println("Exception: " + t);
-                Log.e(TAG, "Unable to submit login to API.");
+                Log.e(TAG, "Unable to get games from API.");
             }
         });
-    }}
+    }
+}

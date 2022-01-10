@@ -15,13 +15,13 @@ public class Lists extends AppCompatActivity implements AdapterView.OnItemSelect
     private static final String[] paths = {"item 1", "item 2", "item 3"};
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lists);
 
-        spinner = (Spinner)findViewById(R.id.spinner1);
-        ArrayAdapter<String>adapter = new ArrayAdapter<String>(Lists.this,
-                android.R.layout.simple_spinner_item,paths);
+        spinner = (Spinner) findViewById(R.id.spinner1);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Lists.this,
+                android.R.layout.simple_spinner_item, paths);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -48,7 +48,7 @@ public class Lists extends AppCompatActivity implements AdapterView.OnItemSelect
 //set the spinners adapter to the previously created one.
 
 
-}
+    }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {

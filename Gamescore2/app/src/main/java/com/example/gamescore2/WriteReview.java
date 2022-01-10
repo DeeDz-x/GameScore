@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class WriteReview extends AppCompatActivity implements View.OnClickListener{
+public class WriteReview extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,7 @@ public class WriteReview extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.cancelButtonWriteReview:
                 Intent i = new Intent(this, Landingpage.class);
                 startActivity(i);

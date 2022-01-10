@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class ProfileView extends AppCompatActivity implements View.OnClickListener{
+public class ProfileView extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class ProfileView extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
 
 
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.changeProfileView:
                 Intent i = new Intent(this, Profile.class);
                 startActivity(i);
@@ -36,4 +36,5 @@ public class ProfileView extends AppCompatActivity implements View.OnClickListen
                 break;
 
         }
-    }}
+    }
+}

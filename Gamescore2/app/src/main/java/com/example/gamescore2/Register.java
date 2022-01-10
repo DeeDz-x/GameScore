@@ -27,7 +27,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Register extends AppCompatActivity implements View.OnClickListener{
+public class Register extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "";
     private ApiService mApiService;
@@ -53,49 +53,43 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
-        Log.d("test", "clicked");
-
         username = findViewById(R.id.usernameRegister);
         email = findViewById(R.id.emailRegister);
         confirmEmail = findViewById(R.id.confirmEmail);
         password = findViewById(R.id.passwordRegister);
         confirmPassword = findViewById(R.id.confirmPassword);
 
-        if (!email.getText().toString().equals(confirmEmail.getText().toString())){
+        if (!email.getText().toString().equals(confirmEmail.getText().toString())) {
             //email.getText().clear();
             confirmEmail.getText().clear();
             EmailMatchDialog emailMatchDialog = new EmailMatchDialog();
-            emailMatchDialog.show(getSupportFragmentManager(),"dialog email do not match");
+            emailMatchDialog.show(getSupportFragmentManager(), "dialog email do not match");
 
 
-        }
-        else if(username.getText().toString().equals("") || email.getText().toString().equals("") || password.getText().toString().equals("") || confirmPassword.getText().toString().equals("") || confirmEmail.getText().toString().equals("") ||!email.getText().toString().contains("@")){
+        } else if (username.getText().toString().equals("") || email.getText().toString().equals("") || password.getText().toString().equals("") || confirmPassword.getText().toString().equals("") || confirmEmail.getText().toString().equals("") || !email.getText().toString().contains("@")) {
             FillFormDialog fillFormDialog = new FillFormDialog();
             fillFormDialog.show(getSupportFragmentManager(), "empty form");
 
-            Log.d("test","fill in form");
+            Log.d("test", "fill in form");
 
-        }
-        else if (!password.getText().toString().equals(confirmPassword.getText().toString())){
+        } else if (!password.getText().toString().equals(confirmPassword.getText().toString())) {
             confirmPassword.getText().clear();
             password.getText().clear();
             PasswordMatchDialog passwordMatchDialog = new PasswordMatchDialog();
-            passwordMatchDialog.show(getSupportFragmentManager(),"dialog password do not match");
-        }
-        else if(username.getText().toString().length() < 3 || password.getText().toString().length() < 3){
+            passwordMatchDialog.show(getSupportFragmentManager(), "dialog password do not match");
+        } else if (username.getText().toString().length() < 3 || password.getText().toString().length() < 3) {
             confirmPassword.getText().clear();
             password.getText().clear();
             LengthDialog lengthDialog = new LengthDialog();
             lengthDialog.show(getSupportFragmentManager(), "dialog length to short");
-        }
-        else if(email.getText().toString().equals(confirmEmail.getText().toString())&& password.getText().toString().equals(confirmPassword.getText().toString())) {
+        } else if (email.getText().toString().equals(confirmEmail.getText().toString()) && password.getText().toString().equals(confirmPassword.getText().toString())) {
             sendRegister(email.getText().toString(), password.getText().toString(), username.getText().toString());
-            Intent intent = new Intent(this,SignIn.class);
+            Intent intent = new Intent(this, SignIn.class);
             startActivity(intent);
 
 
+        }
     }
-}
 
     private void sendRegister(String mEmail, String mPassword, String mUsername) {
 
@@ -104,18 +98,18 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         jsonParams.put("e_mail", mEmail);
         jsonParams.put("username", mUsername);
 
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(jsonParams)).toString());
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), (new JSONObject(jsonParams)).toString());
 
         Call<ResponseBody> response = mApiService.sendRegister(body);
 
         response.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
 
-                    Log.d("test", "klappt jetzt");
+                    Log.d("test", "Register-API works");
                 } else {
-                    Log.d("test", "klappt nicht");
+                    Log.d("test", "Register-API doesnt work");
 
                 }
 
@@ -124,10 +118,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 System.out.println("Exception: " + t);
-                Log.e(TAG, "Unable to submit login to API.");
+                Log.e(TAG, "Unable to submit register to API.");
             }
 
         });
-    }}
+    }
+}
 
 

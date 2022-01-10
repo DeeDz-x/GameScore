@@ -18,7 +18,7 @@ import data.remotes.ApiService;
 import data.remotes.ApiUtils;
 import okhttp3.RequestBody;
 
-public class Profile extends AppCompatActivity implements View.OnClickListener{
+public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "";
     private ApiService mApiService;
@@ -65,15 +65,15 @@ public class Profile extends AppCompatActivity implements View.OnClickListener{
                 && region.getText().toString() != null && favGames.getText().toString() != null && aboutMe.getText().toString() != null
                 && plattform1.getText().toString() != null && plattform2.getText().toString() != null && plattform3.getText().toString() != null
                 && plattform4.getText().toString() != null) {
-            sendProfile(name.getText().toString(),name.getText().toString(),name.getText().toString(),name.getText().toString(),
-                    name.getText().toString(),name.getText().toString(),name.getText().toString(),
-                    name.getText().toString(),name.getText().toString(),name.getText().toString());
+            sendProfile(name.getText().toString(), name.getText().toString(), name.getText().toString(), name.getText().toString(),
+                    name.getText().toString(), name.getText().toString(), name.getText().toString(),
+                    name.getText().toString(), name.getText().toString(), name.getText().toString());
         }
 
     }
 
     private void sendProfile(String mName, String musername, String mAge, String mRegion, String mfavGames, String mAboutMe
-    , String mPlattform1, String mPlattform2, String mPlattform3, String mPlattform4) {
+            , String mPlattform1, String mPlattform2, String mPlattform3, String mPlattform4) {
 
         Map<String, Object> jsonParams = new ArrayMap<>();
         JSONArray jsonArray = new JSONArray();
@@ -86,7 +86,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener{
         jsonParams.put("e_mail", "nichts");
         jsonParams.put("picture", "picture");
 
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(jsonParams)).toString());
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), (new JSONObject(jsonParams)).toString());
 
 
-}}
+    }
+}

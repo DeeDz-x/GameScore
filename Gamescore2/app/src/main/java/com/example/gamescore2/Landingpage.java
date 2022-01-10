@@ -10,9 +10,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
+
 import data.remotes.ApiService;
 import data.remotes.ApiUtils;
 import okhttp3.ResponseBody;
@@ -49,7 +52,7 @@ public class Landingpage extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.profileButtonLandingpage:
                 Intent i = new Intent(this, ProfileView.class);
                 startActivity(i);
@@ -68,7 +71,7 @@ public class Landingpage extends AppCompatActivity implements View.OnClickListen
 
                 Intent l = new Intent(this, SignIn.class);
                 startActivity(l);
-            break;
+                break;
         }
 
     }
@@ -80,7 +83,7 @@ public class Landingpage extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    Log.d("test", "Games klappt jetzt");
+                    Log.d("test", "Games-API works");
                     JSONObject json = new JSONObject();
                     try {
                         json = new JSONObject(response.body().string());
@@ -110,25 +113,25 @@ public class Landingpage extends AppCompatActivity implements View.OnClickListen
 
                     Log.d("test", popGame);
                 } else {
-                    Log.d("test", "Games klappt nicht");
+                    Log.d("test", "Games-API doesnt work");
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 System.out.println("Exception: " + t);
-                Log.e(TAG, "Unable to submit login to API.");
+                Log.e(TAG, "Unable to get games from API.");
             }
         });
     }
 
-    private void sendLogout(String token){
+    private void sendLogout(String token) {
 
         Call<Void> response = mApiService.sendLogout(token);
         response.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     SignIn.token = null;
                     Log.d("test", "logout success");
                 } else {
@@ -137,10 +140,11 @@ public class Landingpage extends AppCompatActivity implements View.OnClickListen
                 }
 
             }
+
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 System.out.println("Exception: " + t);
-                Log.e(TAG, "Unable to submit login to API.");
+                Log.e(TAG, "Unable to submit logout to API.");
             }
         });
     }

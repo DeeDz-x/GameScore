@@ -26,7 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SignIn extends AppCompatActivity implements View.OnClickListener{
+public class SignIn extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "";
     private ApiService mApiService;
@@ -34,7 +34,6 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
     private String key;
     EditText email, password;
     static String token;
-
 
 
     @Override
@@ -61,60 +60,57 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.signInButton:
 
 
-        email = findViewById(R.id.emailSignIn);
-        password = findViewById(R.id.passwordSignIn);
-
-        Log.d("test", "test" + email.getText().toString());
-        Log.d("test", password.getText().toString());
-
-        if (email.getText().toString() != null && password.getText().toString() != null) {
-            sendLogin(email.getText().toString(), password.getText().toString());
+                email = findViewById(R.id.emailSignIn);
+                password = findViewById(R.id.passwordSignIn);
 
 
-            if (token != null) {
-                Intent intent = new Intent(this, Landingpage.class);
-                startActivity(intent);
-            }
+                if (email.getText().toString() != null && password.getText().toString() != null) {
+                    sendLogin(email.getText().toString(), password.getText().toString());
 
-        }
-        break;
+
+                    if (token != null) {
+                        Intent intent = new Intent(this, Landingpage.class);
+                        startActivity(intent);
+                    }
+
+                }
+                break;
 
             case R.id.changeToRegisterButton:
                 Intent intent = new Intent(this, Register.class);
                 startActivity(intent);
                 break;
 
-    }}
+        }
+    }
 
     private void sendLogin(String mEmail, String mPassword) {
-        Log.d("test", "klappt");
 
         Map<String, Object> jsonParams = new ArrayMap<>();
         jsonParams.put("password", mPassword);
         jsonParams.put("e_mail", mEmail);
 
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(jsonParams)).toString());
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), (new JSONObject(jsonParams)).toString());
 
         Call<ResponseBody> response = mApiService.sendLogin(body);
 
         response.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     try {
                         token = "token " + response.body().string();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    Log.d("test","Der token ist:" + token);
-
-                    Log.d("test", "logged in");
+                    Log.d("test", "The token:" + token);
+                    Log.d("test", "Login-API works");
                 } else {
-                    Log.d("test", "log in failed");
+                    Log.d("test", "Login-API doesnt work");
                     LoginFailedDialog loginFailedDialog = new LoginFailedDialog();
                     loginFailedDialog.show(getSupportFragmentManager(), "Login Failed Try again");
 
@@ -131,4 +127,5 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener{
 
         });
 
-    }}
+    }
+}
