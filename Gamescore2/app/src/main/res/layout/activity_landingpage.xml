@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    tools:ignore="SpeakableTextPresentCheck">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Landingpage">
+
+        <ImageView
+            android:id="@+id/profileButtonLandingpage"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            app:layout_constraintEnd_toStartOf="@+id/searchButtonLandingpage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/gamescoreprofil"
+            tools:srcCompat="@drawable/gamescoreprofil" />
+
+        <ImageView
+            android:id="@+id/LogoutButtonLandingpage"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            android:layout_marginEnd="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/plusButtonLandingpage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/gamescorelogout"
+            tools:srcCompat="@drawable/gamescorelogout" />
+
+        <ImageView
+            android:id="@+id/searchButtonLandingpage"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            app:layout_constraintEnd_toStartOf="@+id/plusButtonLandingpage"
+            app:layout_constraintStart_toEndOf="@+id/profileButtonLandingpage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/gamescoresearch"
+            tools:srcCompat="@drawable/gamescoresearch" />
+
+        <ImageView
+            android:id="@+id/plusButtonLandingpage"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            app:layout_constraintEnd_toStartOf="@+id/LogoutButtonLandingpage"
+            app:layout_constraintStart_toEndOf="@+id/searchButtonLandingpage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/gamescoreadd"
+            tools:srcCompat="@drawable/gamescoreadd" />
+
+        <TextView
+            android:id="@+id/hotLandingpage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text=" HOT 🔥"
+            android:textSize="34sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.454"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchButtonLandingpage"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <ImageView
+            android:id="@+id/firstGameImageLandingpage"
+            android:layout_width="196dp"
+            android:layout_height="163dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="18dp"
+            app:layout_constraintEnd_toStartOf="@+id/firstGamenNameLandingpage"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hotLandingpage"
+            app:srcCompat="@drawable/battlefield"
+            tools:srcCompat="@drawable/battlefield" />
+
+        <ImageView
+            android:id="@+id/secondGameImageLandingpage"
+            android:layout_width="131dp"
+            android:layout_height="165dp"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/firstGameImageLandingpage"
+            app:layout_constraintVertical_bias="0.042"
+            app:srcCompat="@drawable/metin2"
+            tools:srcCompat="@drawable/metin2" />
+
+        <TextView
+            android:id="@+id/firstGamenNameLandingpage"
+            android:layout_width="190dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Battlefield 2042"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.837"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hotLandingpage"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/secondGameNameLandingpage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Metin 2"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/firstGameRatingBarLandingpage"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <RatingBar
+            android:id="@+id/firstGameRatingBarLandingpage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:progressTint="#FF9800"
+            android:rating="5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.83"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/firstGamenNameLandingpage"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <RatingBar
+            android:id="@+id/SecondGameRatingBarLandingpage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:progressTint="#FFC107"
+            android:rating="5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.83"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/secondGameNameLandingpage"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
